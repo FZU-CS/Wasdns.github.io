@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>NDN.p4 | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="p4," />
+  
+
+  <meta name="description" content="NDN.p4 可编程信息中心数据平面reference：ICN - CDN/NDNCDN/NDN 是一种ICN的解决方案。
+什么是ICN？背景：用户需求决定了网络通信模型。互联网用户的需求从主机之间的通信演进为主机到网络的信息重复访问。用户关注的是信息，而不是信息的存储位置。因此，为了适应对海量信息的访问需求，应分离计算、存储、通信、应用与信息的联系，摆脱传统体系结构对信息的束缚，使信息成为体系结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NDN.p4">
+<meta property="og:url" content="https://wasdns.github.io/2017/03/06/NDN-p4/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="NDN.p4 可编程信息中心数据平面reference：ICN - CDN/NDNCDN/NDN 是一种ICN的解决方案。
+什么是ICN？背景：用户需求决定了网络通信模型。互联网用户的需求从主机之间的通信演进为主机到网络的信息重复访问。用户关注的是信息，而不是信息的存储位置。因此，为了适应对海量信息的访问需求，应分离计算、存储、通信、应用与信息的联系，摆脱传统体系结构对信息的束缚，使信息成为体系结">
+<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/4915D80E-24EF-4CA8-BFDB-842E81D5719F.png">
+<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/7B7DAC94-BAE8-45FA-B661-39082B392EE7.png">
+<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/121E7B17-5B53-4EC5-AE9E-234093999D98.png">
+<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/7ECCC6E2-F470-4E08-B3FD-EFF4A25AAAB6.png">
+<meta property="og:updated_time" content="2017-03-06T14:16:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NDN.p4">
+<meta name="twitter:description" content="NDN.p4 可编程信息中心数据平面reference：ICN - CDN/NDNCDN/NDN 是一种ICN的解决方案。
+什么是ICN？背景：用户需求决定了网络通信模型。互联网用户的需求从主机之间的通信演进为主机到网络的信息重复访问。用户关注的是信息，而不是信息的存储位置。因此，为了适应对海量信息的访问需求，应分离计算、存储、通信、应用与信息的联系，摆脱传统体系结构对信息的束缚，使信息成为体系结">
+<meta name="twitter:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/4915D80E-24EF-4CA8-BFDB-842E81D5719F.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Class
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Tag
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Link
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            About
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Find
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NDN-p4-可编程信息中心数据平面"><span class="toc-text">NDN.p4 可编程信息中心数据平面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#reference：ICN-CDN-NDN"><span class="toc-text">reference：ICN - CDN/NDN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是ICN？"><span class="toc-text">什么是ICN？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CDN-NDN：ICN的一种解决方案"><span class="toc-text">CDN/NDN：ICN的一种解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#概要"><span class="toc-text">概要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Named-Data-Networking"><span class="toc-text">Named-Data Networking</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#reference：NDN-paper-中文翻译版本"><span class="toc-text">reference：NDN paper(中文翻译版本)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用P4实现NDN协议数据报处理"><span class="toc-text">用P4实现NDN协议数据报处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#未来工作"><span class="toc-text">未来工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本篇论文的意义"><span class="toc-text">本篇论文的意义</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-NDN-p4" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">NDN.p4</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.06</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/03/06/NDN-p4/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="NDN-p4-可编程信息中心数据平面"><a href="#NDN-p4-可编程信息中心数据平面" class="headerlink" title="NDN.p4 可编程信息中心数据平面"></a>NDN.p4 可编程信息中心数据平面</h2><h3 id="reference：ICN-CDN-NDN"><a href="#reference：ICN-CDN-NDN" class="headerlink" title="reference：ICN - CDN/NDN"></a>reference：ICN - CDN/NDN</h3><p>CDN/NDN 是一种ICN的解决方案。</p>
+<h4 id="什么是ICN？"><a href="#什么是ICN？" class="headerlink" title="什么是ICN？"></a>什么是ICN？</h4><p>背景：用户需求决定了网络通信模型。互联网用户的需求从主机之间的通信演进为主机到网络的信息重复访问。用户关注的是信息，而不是信息的存储位置。<strong>因此，为了适应对海量信息的访问需求，应分离计算、存储、通信、应用与信息的联系，摆脱传统体系结构对信息的束缚，使信息成为体系结构的设计中心，网络通信模型为互连信息。</strong></p>
+<p>以信息为中心的网络通信模型，取代传统的以地址为中心的网络通信模型。</p>
+<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/4915D80E-24EF-4CA8-BFDB-842E81D5719F.png" alt=""></p>
+<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/7B7DAC94-BAE8-45FA-B661-39082B392EE7.png" alt=""></p>
+<h4 id="CDN-NDN：ICN的一种解决方案"><a href="#CDN-NDN：ICN的一种解决方案" class="headerlink" title="CDN/NDN：ICN的一种解决方案"></a>CDN/NDN：ICN的一种解决方案</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">=====</div><div class="line">安全层</div><div class="line">=====</div><div class="line">网络层</div><div class="line">=====</div><div class="line">策略层</div><div class="line">=====</div></pre></td></tr></table></figure>
+<p>信息名字(URL表示)作为路由标识，IP作为底层网络。提供两类分组：Interest(需求分组)，Data(信息分组)。</p>
+<p>工作流程：</p>
+<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/121E7B17-5B53-4EC5-AE9E-234093999D98.png" alt=""></p>
+<p>特点：1.高效性 2.安全性</p>
+<p>缺点：1.拓展性 2.拥塞控制 etc</p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>需求：网络层面的内容可感知，需要经常改动设备的行为</p>
+<p>不足：难以出现基于信息中心网络的解决方案。ICN设备架构紧耦，难以在运行时网络中进行部署和测试，hard to share。</p>
+<p>解决方案：P4 =&gt; 网络设备设计重构 =&gt; 通过高层次语言提供数据报处理过程的可编程性</p>
+<p>本篇论文：用P4在交换机中实现NDN。</p>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>1.网络设备设计离不开两点：a.新的网络协议；b.除IP转发之外的QoS、安全等网络功能。</p>
+<p>=&gt; 针对 高性能可重配置(可编程)数据报处理器 的研究</p>
+<p>== 处理器 + 新型编程语言(便捷、可重用，表达网络功能)</p>
+<p>2.ICN相关研究：重构因特网网络层 =&gt; 可扩展性、高效的信息内容分配。</p>
+<p>信息内容请求 =&gt; ICN设备 =&gt; 内容辨别 =&gt; 路径追溯 =&gt; 路由至最近的信息缓存设备</p>
+<p>目前挑战：路由算法、负载均衡、硬件支持 etc</p>
+<p>作者认为，倘若下一代可编程的设备能够描述类ICN的数据报处理过程，那么对于ICN概念的推广和发展会带来更多的好处。</p>
+<p>本篇论文：用P4实现NDN(ICN的一种解决方案)协议的处理。</p>
+<h3 id="Named-Data-Networking"><a href="#Named-Data-Networking" class="headerlink" title="Named-Data Networking"></a>Named-Data Networking</h3><h4 id="reference：NDN-paper-中文翻译版本"><a href="#reference：NDN-paper-中文翻译版本" class="headerlink" title="reference：NDN paper(中文翻译版本)"></a>reference：<a href="http://blog.csdn.net/gongxifacai_believe/article/details/50823420" target="_blank" rel="external">NDN paper(中文翻译版本)</a></h4><p>NDN，是一种广为人知、十分有代表性的ICN解决方案。</p>
+<p>1.命名网络数据报</p>
+<p>2.In-network缓存</p>
+<p>3.数据单元的细粒度安全嵌入</p>
+<p>4.任播 Anycast</p>
+<blockquote>
+<p>目的：用面向内容的网络层成为新的网络栈瘦腰，取代原有瘦腰IP。</p>
+<p>简单介绍：</p>
+</blockquote>
+<p>A.兴趣包和数据包，它们不含源目地址，通过URL-like名字转发。</p>
+<p>名字 == 使用分隔符划分的不定长的字符串</p>
+<p>eg.一个兴趣包的名字 ndn:/named-data.net/publications/ndn ccr/file.pdf</p>
+<p>B.兴趣包和数据包在网络中传播都需要在NDN路由器中查找多张流表。</p>
+<p>兴趣包基于 name-based路由表中的信息 进行转发；每一个不同的兴趣包的转发都会在其经过的路由器中留下轨迹，以便将数据包返回给兴趣请求者。</p>
+<p>C.具体的处理过程：</p>
+<p>当路由器收到一个兴趣包…</p>
+<p>1.查找内部缓存(Content Store, CS)，在P4中表示为一张流表：</p>
+<p>找到信息 =&gt; 返回数据包；<br>没找到信息 =&gt; 下一步。</p>
+<p>2.查找 待决策兴趣表(Pending Interest Table)，在P4中表示为一张流表：</p>
+<p>找到一模一样的兴趣请求 =&gt; 丢包 + 当入端口和之前的请求不一样时，记录入端口；</p>
+<p>没找到 =&gt; 下一步。</p>
+<p>3.查找兴趣名称的最长前缀匹配表(LPM，Fowarding Information Base Table)，在P4中表示为一张流表：</p>
+<p>根据名字前缀找路由信息</p>
+<p>找到 =&gt; 根据表项端口输出，转发兴趣包；</p>
+<p>没找到 =&gt; 丢包。</p>
+<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/7ECCC6E2-F470-4E08-B3FD-EFF4A25AAAB6.png" alt=""></p>
+<h3 id="用P4实现NDN协议数据报处理"><a href="#用P4实现NDN协议数据报处理" class="headerlink" title="用P4实现NDN协议数据报处理"></a>用P4实现NDN协议数据报处理</h3><p>具体请翻阅Github：<a href="https://github.com/signorello/NDN.p4/tree/master/p4src" target="_blank" rel="external">reference</a></p>
+<p>主要逻辑：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">control ingress &#123;</div><div class="line">    apply(count_table);</div><div class="line">    if (name_metadata.components != 0) &#123;</div><div class="line">	  apply(hashName_table);</div><div class="line">    	  apply(pit_table);</div><div class="line"></div><div class="line">    	  if( flow_metadata.packetType == NDNTYPE_INT )</div><div class="line">    	  &#123; </div><div class="line">    	     if(flow_metadata.isInPIT == 0)&#123; </div><div class="line">    	        apply(fib_table);</div><div class="line">    	     &#125;</div><div class="line">    	    </div><div class="line">    	     // the next call either updates or adds an entry</div><div class="line">    	     apply(updatePit_table);</div><div class="line">    	  &#125;</div><div class="line">    	  else &#123;           // this is a Data packet</div><div class="line">	      // if unsolicited : drop it</div><div class="line">	      // else : retrieve PIT entry and send downstream</div><div class="line">	      apply(routeData_table);</div><div class="line">    	  &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">control egress &#123;</div><div class="line">    // may be a future place for caching logic</div><div class="line">    apply(send_packet_table);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="未来工作"><a href="#未来工作" class="headerlink" title="未来工作"></a>未来工作</h3><p>1.P4对变长TLV(可能是下一代网络协议)的支持</p>
+<p>2.加速 由于数据报操作而产生的流表项更新</p>
+<p>3.P4不允许省略/跳过对数据报部分的解析，换句话说，解析的部分必须是连贯的，不能出现 解析部分-未解析部分-解析部分 的情况。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>第一个团队使用P4编程NDN-enable路由器对数据报的处理过程。</p>
+<h3 id="本篇论文的意义"><a href="#本篇论文的意义" class="headerlink" title="本篇论文的意义"></a>本篇论文的意义</h3><p>是我们用P4语言实现虚拟化切片最终成文的参考。</p>
+<blockquote>
+<p>文章结构：</p>
+</blockquote>
+<p>1.引言 =&gt; 背景介绍</p>
+<p>2.NDN/网络虚拟化 的介绍</p>
+<p>3.P4的介绍</p>
+<p>4.[].p4程序的介绍<br>    a.Header &amp; Parser<br>    b.Control Flow<br>    c.Table</p>
+<p>顺序可改，个人认为：流控制程序 =&gt; 表、动作 =&gt; 解析过程 =&gt; 首部定义。</p>
+<p>5.Demo</p>
+<p>6.未来工作</p>
+<p>7.总结</p>
+<blockquote>
+<p>2017/3/6</p>
+</blockquote>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/06/Introduction/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Class
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Tag
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Link
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              About
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Find
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/03/06/NDN-p4/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
