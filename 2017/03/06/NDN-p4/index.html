@@ -23,16 +23,11 @@
 <meta property="og:site_name" content="Wasdns">
 <meta property="og:description" content="NDN.p4 可编程信息中心数据平面reference：ICN - CDN/NDNCDN/NDN 是一种ICN的解决方案。
 什么是ICN？背景：用户需求决定了网络通信模型。互联网用户的需求从主机之间的通信演进为主机到网络的信息重复访问。用户关注的是信息，而不是信息的存储位置。因此，为了适应对海量信息的访问需求，应分离计算、存储、通信、应用与信息的联系，摆脱传统体系结构对信息的束缚，使信息成为体系结">
-<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/4915D80E-24EF-4CA8-BFDB-842E81D5719F.png">
-<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/7B7DAC94-BAE8-45FA-B661-39082B392EE7.png">
-<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/121E7B17-5B53-4EC5-AE9E-234093999D98.png">
-<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/7ECCC6E2-F470-4E08-B3FD-EFF4A25AAAB6.png">
-<meta property="og:updated_time" content="2017-03-06T14:16:52.000Z">
+<meta property="og:updated_time" content="2017-03-06T14:21:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NDN.p4">
 <meta name="twitter:description" content="NDN.p4 可编程信息中心数据平面reference：ICN - CDN/NDNCDN/NDN 是一种ICN的解决方案。
 什么是ICN？背景：用户需求决定了网络通信模型。互联网用户的需求从主机之间的通信演进为主机到网络的信息重复访问。用户关注的是信息，而不是信息的存储位置。因此，为了适应对海量信息的访问需求，应分离计算、存储、通信、应用与信息的联系，摆脱传统体系结构对信息的束缚，使信息成为体系结">
-<meta name="twitter:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/4915D80E-24EF-4CA8-BFDB-842E81D5719F.png">
 
   
 
@@ -242,12 +237,8 @@
       <h2 id="NDN-p4-可编程信息中心数据平面"><a href="#NDN-p4-可编程信息中心数据平面" class="headerlink" title="NDN.p4 可编程信息中心数据平面"></a>NDN.p4 可编程信息中心数据平面</h2><h3 id="reference：ICN-CDN-NDN"><a href="#reference：ICN-CDN-NDN" class="headerlink" title="reference：ICN - CDN/NDN"></a>reference：ICN - CDN/NDN</h3><p>CDN/NDN 是一种ICN的解决方案。</p>
 <h4 id="什么是ICN？"><a href="#什么是ICN？" class="headerlink" title="什么是ICN？"></a>什么是ICN？</h4><p>背景：用户需求决定了网络通信模型。互联网用户的需求从主机之间的通信演进为主机到网络的信息重复访问。用户关注的是信息，而不是信息的存储位置。<strong>因此，为了适应对海量信息的访问需求，应分离计算、存储、通信、应用与信息的联系，摆脱传统体系结构对信息的束缚，使信息成为体系结构的设计中心，网络通信模型为互连信息。</strong></p>
 <p>以信息为中心的网络通信模型，取代传统的以地址为中心的网络通信模型。</p>
-<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/4915D80E-24EF-4CA8-BFDB-842E81D5719F.png" alt=""></p>
-<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/7B7DAC94-BAE8-45FA-B661-39082B392EE7.png" alt=""></p>
 <h4 id="CDN-NDN：ICN的一种解决方案"><a href="#CDN-NDN：ICN的一种解决方案" class="headerlink" title="CDN/NDN：ICN的一种解决方案"></a>CDN/NDN：ICN的一种解决方案</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">=====</div><div class="line">安全层</div><div class="line">=====</div><div class="line">网络层</div><div class="line">=====</div><div class="line">策略层</div><div class="line">=====</div></pre></td></tr></table></figure>
 <p>信息名字(URL表示)作为路由标识，IP作为底层网络。提供两类分组：Interest(需求分组)，Data(信息分组)。</p>
-<p>工作流程：</p>
-<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/121E7B17-5B53-4EC5-AE9E-234093999D98.png" alt=""></p>
 <p>特点：1.高效性 2.安全性</p>
 <p>缺点：1.拓展性 2.拥塞控制 etc</p>
 <h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>需求：网络层面的内容可感知，需要经常改动设备的行为</p>
@@ -267,10 +258,8 @@
 <p>2.In-network缓存</p>
 <p>3.数据单元的细粒度安全嵌入</p>
 <p>4.任播 Anycast</p>
-<blockquote>
 <p>目的：用面向内容的网络层成为新的网络栈瘦腰，取代原有瘦腰IP。</p>
 <p>简单介绍：</p>
-</blockquote>
 <p>A.兴趣包和数据包，它们不含源目地址，通过URL-like名字转发。</p>
 <p>名字 == 使用分隔符划分的不定长的字符串</p>
 <p>eg.一个兴趣包的名字 ndn:/named-data.net/publications/ndn ccr/file.pdf</p>
@@ -287,7 +276,6 @@
 <p>根据名字前缀找路由信息</p>
 <p>找到 =&gt; 根据表项端口输出，转发兴趣包；</p>
 <p>没找到 =&gt; 丢包。</p>
-<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/7ECCC6E2-F470-4E08-B3FD-EFF4A25AAAB6.png" alt=""></p>
 <h3 id="用P4实现NDN协议数据报处理"><a href="#用P4实现NDN协议数据报处理" class="headerlink" title="用P4实现NDN协议数据报处理"></a>用P4实现NDN协议数据报处理</h3><p>具体请翻阅Github：<a href="https://github.com/signorello/NDN.p4/tree/master/p4src" target="_blank" rel="external">reference</a></p>
 <p>主要逻辑：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">control ingress &#123;</div><div class="line">    apply(count_table);</div><div class="line">    if (name_metadata.components != 0) &#123;</div><div class="line">	  apply(hashName_table);</div><div class="line">    	  apply(pit_table);</div><div class="line"></div><div class="line">    	  if( flow_metadata.packetType == NDNTYPE_INT )</div><div class="line">    	  &#123; </div><div class="line">    	     if(flow_metadata.isInPIT == 0)&#123; </div><div class="line">    	        apply(fib_table);</div><div class="line">    	     &#125;</div><div class="line">    	    </div><div class="line">    	     // the next call either updates or adds an entry</div><div class="line">    	     apply(updatePit_table);</div><div class="line">    	  &#125;</div><div class="line">    	  else &#123;           // this is a Data packet</div><div class="line">	      // if unsolicited : drop it</div><div class="line">	      // else : retrieve PIT entry and send downstream</div><div class="line">	      apply(routeData_table);</div><div class="line">    	  &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">control egress &#123;</div><div class="line">    // may be a future place for caching logic</div><div class="line">    apply(send_packet_table);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
