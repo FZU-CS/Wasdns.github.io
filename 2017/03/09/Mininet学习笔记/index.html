@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mininet学习笔记 | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="mininet," />
+  
+
+  <meta name="description" content="Mininet 学习笔记1.Mininet 是什么？
+起源于Stanford；包含主机、控制器、交换机和链路的模拟网络。
+不推荐使用自带的控制器 =&amp;gt; 指定其他控制器远程连接。
+创建虚拟网络的模拟工具。
+方便：能够连接真实网络；提供网络测试平台；性能功能强大。
+2.Mininet 可以做什么？
+简单的网络拓扑测试平台；支持复杂拓扑测试；提供网络测试和实验的可拓展API。
+3.为什么选择 Mi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mininet学习笔记">
+<meta property="og:url" content="https://wasdns.github.io/2017/03/09/Mininet学习笔记/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="Mininet 学习笔记1.Mininet 是什么？
+起源于Stanford；包含主机、控制器、交换机和链路的模拟网络。
+不推荐使用自带的控制器 =&amp;gt; 指定其他控制器远程连接。
+创建虚拟网络的模拟工具。
+方便：能够连接真实网络；提供网络测试平台；性能功能强大。
+2.Mininet 可以做什么？
+简单的网络拓扑测试平台；支持复杂拓扑测试；提供网络测试和实验的可拓展API。
+3.为什么选择 Mi">
+<meta property="og:updated_time" content="2017-03-09T12:30:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mininet学习笔记">
+<meta name="twitter:description" content="Mininet 学习笔记1.Mininet 是什么？
+起源于Stanford；包含主机、控制器、交换机和链路的模拟网络。
+不推荐使用自带的控制器 =&amp;gt; 指定其他控制器远程连接。
+创建虚拟网络的模拟工具。
+方便：能够连接真实网络；提供网络测试平台；性能功能强大。
+2.Mininet 可以做什么？
+简单的网络拓扑测试平台；支持复杂拓扑测试；提供网络测试和实验的可拓展API。
+3.为什么选择 Mi">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mininet-学习笔记"><span class="toc-text">Mininet 学习笔记</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Mininet学习笔记" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Mininet学习笔记</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/03/09/Mininet学习笔记/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Mininet-学习笔记"><a href="#Mininet-学习笔记" class="headerlink" title="Mininet 学习笔记"></a>Mininet 学习笔记</h2><p><strong>1.Mininet 是什么？</strong></p>
+<p>起源于Stanford；包含主机、控制器、交换机和链路的模拟网络。</p>
+<p>不推荐使用自带的控制器 =&gt; 指定其他控制器远程连接。</p>
+<p>创建虚拟网络的模拟工具。</p>
+<p>方便：能够连接真实网络；提供网络测试平台；性能功能强大。</p>
+<p><strong>2.Mininet 可以做什么？</strong></p>
+<p>简单的网络拓扑测试平台；支持复杂拓扑测试；提供网络测试和实验的可拓展API。</p>
+<p><strong>3.为什么选择 Mininet？</strong></p>
+<p>相比仿真器：</p>
+<p>(1)启动速度非常快</p>
+<p>(2)扩展性：数百个交换机</p>
+<p>(3)带宽提供多，2Gbps</p>
+<p>(4)方便安装、易使用</p>
+<p>相比模拟器：</p>
+<p>(1)运行真实的代码，如APP、操作系统内核代码等</p>
+<p>(2)容易连接真实网络</p>
+<p>相比硬件测试床：</p>
+<p>(1)便宜</p>
+<p>(2)快速重新配置、重新启动</p>
+<p><strong>4.Mininet 安装部署</strong></p>
+<p>三种方法：</p>
+<p>(1)装有Mininet的虚拟机</p>
+<p>官网下载：mininet.org/download</p>
+<p>建议：桥接模式；关闭firewall。</p>
+<p>(2)Github安装</p>
+<p>install.sh args: -n3V 2.5.0</p>
+<p>(3)Ubuntu apt-get</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mininet</div></pre></td></tr></table></figure>
+<p>Hint: 如果之前安装过mininet，需要删除依赖；安装时需要停用已有的OvS、Controller的进程。</p>
+<p><strong>5.Mininet 文件结构</strong></p>
+<p>(1)运行文件</p>
+<p>bin/mn：主要运行文件，应用Python程序编写，定义了MininetRunner类，执行sudo mn即调用本程序，是模拟网络的主程序，为整个测试创建基础平台。</p>
+<p>(2)核心代码</p>
+<p>在mininet子目录。</p>
+<p>(3)其他文件</p>
+<p>custom/：放置自定义Python脚本，用于自定义拓扑。</p>
+<p>util/：放置辅助文件，包括安装脚本、文档辅助生成等。</p>
+<p>example/：使用实例，包括可视化。</p>
+<p><strong>6.Mininet 命令详解</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">(1)网络创建启动参数：</div><div class="line">    --topo</div><div class="line">    --custom</div><div class="line">    --switch</div><div class="line">    --controller</div><div class="line">    --mac</div><div class="line">(2)内部交互命令：</div><div class="line">    dump</div><div class="line">    net</div><div class="line">    nodes</div><div class="line">    links</div><div class="line">    dpctl</div><div class="line">    iperf</div><div class="line">(3)外部运行参数：</div><div class="line">    -c：清除配置信息</div><div class="line">    -h：帮助</div></pre></td></tr></table></figure>
+<p>(1)网络构建参数 </p>
+<p>a.<code>--topo</code></p>
+<p>单一拓扑(Single)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mn --topo=single,3</div></pre></td></tr></table></figure>
+<p>线性拓扑(Linear)拓扑：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mn --topo=linear,4 # 主机数=交换机数=4</div></pre></td></tr></table></figure>
+<p>树形拓扑(Tree)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mn --topo=tree,depth=2,fanout=2 # 深度为2，设备下挂设备数为2</div></pre></td></tr></table></figure>
+<p>自定义拓扑(Custom)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mn --custom file.py --topo mytopo</div></pre></td></tr></table></figure>
+<p>b.网络构建参数 <code>--switch</code></p>
+<p>定义mininet要使用的交换机(默认使用OVSK，即OvS交换机)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">OpenvSwitch args:</div><div class="line"></div><div class="line">ovsk</div><div class="line">ovsbr</div><div class="line">ivs</div><div class="line"></div><div class="line">lxbr =&gt; 内核态</div><div class="line">user =&gt; 用户态</div></pre></td></tr></table></figure>
+<p>c.<code>--controller</code></p>
+<p>定义要使用的控制器，如果没有指定则使用mininet中自带的控制器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mn --controller=remote,ip=[IP],port=[Port]</div></pre></td></tr></table></figure>
+<p>d.<code>--mac</code></p>
+<p>自动配置设备的MAC地址：让MAC地址易读。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mn --mac</div></pre></td></tr></table></figure>
+<p>(2)内部交互命令</p>
+<p>使用一系列命令查看并验证网络系统的链路健壮情况。</p>
+<p>a.无需参数的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">help</div><div class="line">dump</div><div class="line">intfs # 网络接口信息</div><div class="line">nodes</div><div class="line">links # 查看链路</div><div class="line">pingpair</div><div class="line">pingall</div></pre></td></tr></table></figure>
+<p>b.设备操作，需要操作命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">iperf</div><div class="line">iperfudp</div><div class="line"></div><div class="line">link # 禁用或开始节点间链路</div><div class="line">dpctl # 流表操作</div><div class="line">xterm </div><div class="line">py # eg. py net.addSwitch(&apos;s3&apos;)</div><div class="line">sh</div></pre></td></tr></table></figure>
+<p>Hint：改变拓扑，在mininet中调用py命令。</p>
+<p>Easytest:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sudo mn</div><div class="line"></div><div class="line">py net.addHost(&apos;h3&apos;) # add host</div><div class="line">py net.addLink(s1.net.get(&apos;h3&apos;)) # add link</div><div class="line">py s1.attach(&apos;s1-eth3&apos;) # add port</div><div class="line">py net.get(&apos;h3&apos;).cmd(&apos;ifconfig h3-eth0 10.3&apos;) # add IP</div><div class="line"></div><div class="line">pingall</div><div class="line"></div><div class="line">py help</div><div class="line">py dir(s1)</div></pre></td></tr></table></figure>
+<p><strong>7.Mininet 可视化：Miniedit</strong></p>
+<p><code>mininet/examples/miniedit.py</code></p>
+<p>三步：</p>
+<p>(1)Miniedit启动</p>
+<p>Hint: 需要可视化桌面</p>
+<p>(2)自定义创建拓扑，设置设备信息</p>
+<p>(3)运行拓扑并生成拓扑脚本</p>
+<p><strong>8.应用1 玩转流表</strong></p>
+<p>refer: <a href="http://www.sdnlab.com/2122.html" target="_blank" rel="external">http://www.sdnlab.com/2122.html</a>, ryubook firstexample</p>
+<p>使用dpctl对OvS进行操作，添加和删除流表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dpctl dump-flows</div><div class="line">dpctl del-flows</div></pre></td></tr></table></figure>
+<p><strong>9.应用2 Mininet模拟多数据中心带宽测试</strong></p>
+<p>refer: <a href="http://www.sdnlab.com/3296.html" target="_blank" rel="external">http://www.sdnlab.com/3296.html</a></p>
+<blockquote>
+<p>2017.3.9</p>
+</blockquote>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/09/PaperHint-1/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/03/09/Mininet学习笔记/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
