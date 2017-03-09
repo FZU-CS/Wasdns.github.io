@@ -35,7 +35,7 @@
 2.Mininet 可以做什么？
 简单的网络拓扑测试平台；支持复杂拓扑测试；提供网络测试和实验的可拓展API。
 3.为什么选择 Mi">
-<meta property="og:updated_time" content="2017-03-09T12:30:27.000Z">
+<meta property="og:updated_time" content="2017-03-09T12:34:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mininet学习笔记">
 <meta name="twitter:description" content="Mininet 学习笔记1.Mininet 是什么？
@@ -238,7 +238,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mn --custom file.py --topo mytopo</div></pre></td></tr></table></figure>
 <p>b.网络构建参数 <code>--switch</code></p>
 <p>定义mininet要使用的交换机(默认使用OVSK，即OvS交换机)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">OpenvSwitch args:</div><div class="line"></div><div class="line">ovsk</div><div class="line">ovsbr</div><div class="line">ivs</div><div class="line"></div><div class="line">lxbr =&gt; 内核态</div><div class="line">user =&gt; 用户态</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">OpenvSwitch args:</div><div class="line">ovsk</div><div class="line">ovsbr</div><div class="line">ivs</div><div class="line">lxbr =&gt; 内核态</div><div class="line">user =&gt; 用户态</div></pre></td></tr></table></figure>
 <p>c.<code>--controller</code></p>
 <p>定义要使用的控制器，如果没有指定则使用mininet中自带的控制器。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mn --controller=remote,ip=[IP],port=[Port]</div></pre></td></tr></table></figure>
@@ -250,10 +250,10 @@
 <p>a.无需参数的命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">help</div><div class="line">dump</div><div class="line">intfs # 网络接口信息</div><div class="line">nodes</div><div class="line">links # 查看链路</div><div class="line">pingpair</div><div class="line">pingall</div></pre></td></tr></table></figure>
 <p>b.设备操作，需要操作命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">iperf</div><div class="line">iperfudp</div><div class="line"></div><div class="line">link # 禁用或开始节点间链路</div><div class="line">dpctl # 流表操作</div><div class="line">xterm </div><div class="line">py # eg. py net.addSwitch(&apos;s3&apos;)</div><div class="line">sh</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">iperf</div><div class="line">iperfudp</div><div class="line">link # 禁用或开始节点间链路</div><div class="line">dpctl # 流表操作</div><div class="line">xterm </div><div class="line">py # eg. py net.addSwitch(&apos;s3&apos;)</div><div class="line">sh</div></pre></td></tr></table></figure>
 <p>Hint：改变拓扑，在mininet中调用py命令。</p>
 <p>Easytest:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">sudo mn</div><div class="line"></div><div class="line">py net.addHost(&apos;h3&apos;) # add host</div><div class="line">py net.addLink(s1.net.get(&apos;h3&apos;)) # add link</div><div class="line">py s1.attach(&apos;s1-eth3&apos;) # add port</div><div class="line">py net.get(&apos;h3&apos;).cmd(&apos;ifconfig h3-eth0 10.3&apos;) # add IP</div><div class="line"></div><div class="line">pingall</div><div class="line"></div><div class="line">py help</div><div class="line">py dir(s1)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">sudo mn</div><div class="line">py net.addHost(&apos;h3&apos;) # add host</div><div class="line">py net.addLink(s1.net.get(&apos;h3&apos;)) # add link</div><div class="line">py s1.attach(&apos;s1-eth3&apos;) # add port</div><div class="line">py net.get(&apos;h3&apos;).cmd(&apos;ifconfig h3-eth0 10.3&apos;) # add IP</div><div class="line">pingall</div><div class="line">py help</div><div class="line">py dir(s1)</div></pre></td></tr></table></figure>
 <p><strong>7.Mininet 可视化：Miniedit</strong></p>
 <p><code>mininet/examples/miniedit.py</code></p>
 <p>三步：</p>
