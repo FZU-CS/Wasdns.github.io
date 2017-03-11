@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>2017华为云平台SDN教程笔记 | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SDN," />
+  
+
+  <meta name="description" content="SDN 概述和发展趋势ICT启示支撑PC生态系统快速革新的三个因素是：Hardware Substrate，硬件底层化(x86指令集)；Software Definition；Open Source。
+SDN =&amp;gt; 把中间承载网络分层、虚拟化，更加简单
+支撑SDN的关键是找到一个合适的Hardware Substrate =&amp;gt; OpenFlow，描述对网络底层硬件的抽象，基本编程载体是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017华为云平台SDN教程笔记">
+<meta property="og:url" content="https://wasdns.github.io/2017/03/11/2017华为云平台SDN教程笔记/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="SDN 概述和发展趋势ICT启示支撑PC生态系统快速革新的三个因素是：Hardware Substrate，硬件底层化(x86指令集)；Software Definition；Open Source。
+SDN =&amp;gt; 把中间承载网络分层、虚拟化，更加简单
+支撑SDN的关键是找到一个合适的Hardware Substrate =&amp;gt; OpenFlow，描述对网络底层硬件的抽象，基本编程载体是">
+<meta property="og:updated_time" content="2017-03-11T07:22:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017华为云平台SDN教程笔记">
+<meta name="twitter:description" content="SDN 概述和发展趋势ICT启示支撑PC生态系统快速革新的三个因素是：Hardware Substrate，硬件底层化(x86指令集)；Software Definition；Open Source。
+SDN =&amp;gt; 把中间承载网络分层、虚拟化，更加简单
+支撑SDN的关键是找到一个合适的Hardware Substrate =&amp;gt; OpenFlow，描述对网络底层硬件的抽象，基本编程载体是">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SDN-概述和发展趋势"><span class="toc-text">SDN 概述和发展趋势</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ICT启示"><span class="toc-text">ICT启示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未来思考-电信网络架构如何变革？"><span class="toc-text">未来思考 电信网络架构如何变革？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SDN：电信网络软件化"><span class="toc-text">SDN：电信网络软件化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考题：SDN网络和传统IP网络的区别？"><span class="toc-text">思考题：SDN网络和传统IP网络的区别？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SDN解决方案介绍："><span class="toc-text">SDN解决方案介绍：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-DCI：数据中心互联网络"><span class="toc-text">a.DCI：数据中心互联网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么需要新建DCI网络？"><span class="toc-text">为什么需要新建DCI网络？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于SDN的DCI方案总览"><span class="toc-text">基于SDN的DCI方案总览</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#b-智能流量调优方案：RR-方案"><span class="toc-text">b.智能流量调优方案：RR+方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#c-SDN-PCE-方案"><span class="toc-text">c.SDN PCE+方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考题：什么是DCI？"><span class="toc-text">思考题：什么是DCI？</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-2017华为云平台SDN教程笔记" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">2017华为云平台SDN教程笔记</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/03/11/2017华为云平台SDN教程笔记/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="SDN-概述和发展趋势"><a href="#SDN-概述和发展趋势" class="headerlink" title="SDN 概述和发展趋势"></a>SDN 概述和发展趋势</h1><h2 id="ICT启示"><a href="#ICT启示" class="headerlink" title="ICT启示"></a>ICT启示</h2><p>支撑PC生态系统快速革新的三个因素是：Hardware Substrate，硬件底层化(x86指令集)；Software Definition；Open Source。</p>
+<p>SDN =&gt; 把中间承载网络分层、虚拟化，更加简单</p>
+<p>支撑SDN的关键是找到一个合适的Hardware Substrate =&gt; OpenFlow，描述对网络底层硬件的抽象，基本编程载体是Flow，即网络世界的Flow指令集，从而作为硬件架构和软件定义的一个桥梁 =&gt; 下层硬件不断演进，上层的网络软件可以保持兼容，SDN生态圈良好发展。</p>
+<p>核心思想：控制和转发分离，软件应用灵活，可编程。</p>
+<h2 id="未来思考-电信网络架构如何变革？"><a href="#未来思考-电信网络架构如何变革？" class="headerlink" title="未来思考 电信网络架构如何变革？"></a>未来思考 电信网络架构如何变革？</h2><p>唯一路径：网络利用率低<br>协议复杂：维护故障定位困难<br>缺少全局视图：不能全局最优</p>
+<p>IP城域网采用分布式架构，导致管理运维复杂，缺乏管理运维方面的设计，网络在部署一个全局业务策略的时候，需要逐一配置每台设备。随着网络规模和业务的扩大，难以实现对业务的高效管理和故障的快速排除；网络创新困难，IP网络采用了垂直集成，控制平面和数据平面深度耦合，在分布式网络控制机制下，新技术的引入严重依赖于现网设备，并且需要多个设备同步更新，使得新技术的部署周期较长，严重制约着网络的演进发展；设备日益臃肿，由于IP分组技术采用打补丁的演进策略，随着设备支持的功能和业务越来越多，其实现的复杂度也显著增加。</p>
+<p>如何解决上述问题？</p>
+<p>需要对现有网络进行变革，通过转发和控制分离，建立一个统一的控制器，类似于大脑负责计算全网的拓扑和路由信息，实现全局流量的整体优化与调整，区别以往逐一配置每台设备，只要在一台设备上完成更新后即可完成新业务的部署，对故障快速定位与排除。</p>
+<p>技术驱动：网络架构的变革<br>网络：构建一个集中的大脑，实现全局流量和整体最优<br>关键价值：简化运维，自动化调度，提高网络利用率、网络开放。</p>
+<h2 id="SDN：电信网络软件化"><a href="#SDN：电信网络软件化" class="headerlink" title="SDN：电信网络软件化"></a>SDN：电信网络软件化</h2><p>SDN(Software Defined Network)，软件定义网络，是美国斯坦福大学Clean Slate研究组提出的一种新型网络创新架构。</p>
+<p>其核心技术是通过将网络设备控制面和数据面分离开，从而实现了网络流量的灵活控制，为核心网络及应用的创新提供了良好的平台。</p>
+<p>SDN作为网络新型技术，从网络架构和设备架构方面进行创新。</p>
+<p>转发设备不再是专用设备，抽象出功能至控制层面，易于全局调度及管理，降低运维难度。</p>
+<h2 id="思考题：SDN网络和传统IP网络的区别？"><a href="#思考题：SDN网络和传统IP网络的区别？" class="headerlink" title="思考题：SDN网络和传统IP网络的区别？"></a>思考题：SDN网络和传统IP网络的区别？</h2><p>SDN利用控制转发相互分离从架构上解决根本问题：让网络敏捷起来，更快的部署新业务与快速定位故障点。采用资源集中和统一调度、能力开放的策略；让软件来干硬件的活</p>
+<h1 id="SDN解决方案介绍："><a href="#SDN解决方案介绍：" class="headerlink" title="SDN解决方案介绍："></a>SDN解决方案介绍：</h1><p>1.描述RR+方案的应用场景和价值<br>2.掌握PCE+方案的部署实现<br>3.理解基于SDN技术的DCI网络</p>
+<h2 id="a-DCI：数据中心互联网络"><a href="#a-DCI：数据中心互联网络" class="headerlink" title="a.DCI：数据中心互联网络"></a>a.DCI：数据中心互联网络</h2><p>背景：云数据中心需要基于用户体验进行层次化布局，网络需要以数据中心为中心组网进行重构。</p>
+<p>DCI：数据中心互联网络</p>
+<h3 id="为什么需要新建DCI网络？"><a href="#为什么需要新建DCI网络？" class="headerlink" title="为什么需要新建DCI网络？"></a>为什么需要新建DCI网络？</h3><p>1.云数据中心建设位置要求：高拓展性、低成本；资源丰富；温度适宜。</p>
+<p>2.新建大型云数据中心与传统骨干网核心位置不重合。</p>
+<p>3.云业务对网络要求：云计算对时延有非常严格的要求，如跨DC同步计算、虚拟机热迁移等业务需要在10ms以下；DC间流量具有突发性和不均衡性，需要采用SDN技术进行实时智能调优，而现有网络复杂，新技术部署难。 =&gt; 很难重用现有骨干网，需要新建DCI网络</p>
+<h3 id="基于SDN的DCI方案总览"><a href="#基于SDN的DCI方案总览" class="headerlink" title="基于SDN的DCI方案总览"></a>基于SDN的DCI方案总览</h3><p>多地域 多运营商部署多个数据中心的方式 =&gt; 解决用户覆盖、提高用户业务体验的方案。</p>
+<p>DCI方案问题：网络不灵活难以跟住业务快速迭代的步伐，链路利用率较低，居高不下的OPEX压力等。</p>
+<p>华为SDN DCI整体经济方案：顶层端到端协同，实现包含DC云与DC承载网的云网资源的一站式提供和端到端业务自动化协同发放。</p>
+<p>可以支撑云数据中心业务的端到端运营，整体架构包括承载层和控制层，需要在网络基础承载层上引入部署SDN的控制层。</p>
+<p>控制层是网络的业务发放管理平台和网络智能控制中心，该层主要功能部件为: a.业务发放平台，提供业务自动化入口实现租户业务自助发放，以及网络资源状态的可视化和运维管理入口; b.业务协同平台，DCI业务需求分解和DC和IDC的协同，实现端到端的跨控制器资源的协同和分解；c.云平台，接收业务发放平台的业务分解，进行DC云业务分解和协同，实现DC的内存储，计算和网络的协同；d.DC控制器，接受OpenStack业务分解，统一控制DC的NVE和VxLAN GW，实现DC内网络自动部署和控制；e.DCI控制器，接受业务协同平台资源的分解，实现Underlay网络部署的自动化和网络流量的智能优化；f.流量采集工具，调优策略的输入；g.流量采集组件，可以基于端口，TE隧道进行流量采集和分析，并提供网络流量可视化的界面。</p>
+<p>DCI骨干网解决方案承载层是租户业务的承载实体，负责跨DC网络的连接，以及业务宽带和SLA保证，骨干网支持VxLAN技术，提供了大二层组网的能力，能够跨越广域网和多个物理DC构建vDC网络，实现了跨区域的资源节点的互备和虚拟机动态迁移，有效提升了DC云资源的利用效率。</p>
+<p>骨干网部署业界广泛使用的MPLS TE流量工程技术，为租户业务提供端到端的宽带保证，提升了网络资源的利用效率，特别是提供了基于租户和业务的差异化的服务能力。</p>
+<p>网络承载支持采用Overlay技术，Overlay业务网络基于云业务驱动，支持快速的业务开通。Underlay物理网络按需提供网络资源，实现端到端的SLA保障和智能流量的优化。</p>
+<h2 id="b-智能流量调优方案：RR-方案"><a href="#b-智能流量调优方案：RR-方案" class="headerlink" title="b.智能流量调优方案：RR+方案"></a>b.智能流量调优方案：RR+方案</h2><p>目前的IP Core网络存在以下流量调整需求：实现IGW出口/DC出口的流量均衡，均衡链路向流量的分布；降低不同ISP网间费用的结算，将流量更多的分布于费用较低的链路上；提升VIP用户的体验，将VIP用户的流量调整到SLA服务更好的链路上。</p>
+<p>当前解决方案依赖于手工调整BGP路由策略：监控链路带宽利用率；识别出需要调整的流；基于流制作BGP策略，下发给设备；循环操作，直到流量符合期望目标要求。手工调整方法不能实时调整，也存在耗时长，配置和维护复杂问题。</p>
+<p>RR+方案在IP Core现网中加入SDN Controller，通过Controller实现集中控制，智能化流量调优。</p>
+<p>RR+：a.最大化带宽利用率均衡链路间流量的分布，降低网间结算费用，不同客户提供不同SLA服务；b.自动调整流量，取代复杂的手工操作；c.基于标准BGP通讯，可以和现网设备平滑兼容。</p>
+<h2 id="c-SDN-PCE-方案"><a href="#c-SDN-PCE-方案" class="headerlink" title="c.SDN PCE+方案"></a>c.SDN PCE+方案</h2><p>什么是PCE+方案：</p>
+<p>IP网络对流量的转发依赖于路由转发，路由协议主要使用最短路径优先算法，选择Cost值最小的路径进行转发，不会考虑链路带宽的因素，存在宽带利用率低的问题。</p>
+<p>PCE+通过在网络中部署PCE server(SDN Controller)，使用StatefulPCE技术，为MPLS TE LSP集中算路。使网络带宽资源使用尽量达到最优。</p>
+<p>需要新部署的设备：PCE Server，收集全网拓扑信息和托管业务，全局管理网络宽带资源，统一分配全网带宽资源，集中计算LSP业务路径；转发设备均称为PCE Client。</p>
+<p>当网络中的PCE Client需要计算LSP时，会向PCE Server发起路径计算请求，由Server进行计算后再把结果反馈给Client，Client收到结果之后再进行LSP隧道建立。</p>
+<h2 id="思考题：什么是DCI？"><a href="#思考题：什么是DCI？" class="headerlink" title="思考题：什么是DCI？"></a>思考题：什么是DCI？</h2><p>DCI，即Data Center Interconnect，指的是用于数据中心之间互联的网络，DCI网络正是实现“以数据中心为中心组网”的基础承载网络。</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/09/Mininet学习笔记/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/03/11/2017华为云平台SDN教程笔记/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
