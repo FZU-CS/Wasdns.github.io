@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>2017华为云平台NFV教程笔记 | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="NFV," />
+  
+
+  <meta name="description" content="NFV技术概述与发展趋势CT当前面临的结构性挑战A.增收面临结构性挑战：电信业用户数饱和，传统业务下滑。
+B.节流面临结构性挑战：在CT行业投入成本下降的情况下，IT部分的投入持续增长。
+C.创新面临结构性挑战：CT业一年有5个业务创新，IT业的业务创新一年能达到16w个。商用速度上，CT业每月6个上市，IT业每小时12个上市。
+万物互联，IT与CT融合，诞生了NFV。
+什么是NFVNFV，Net">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017华为云平台NFV教程笔记">
+<meta property="og:url" content="https://wasdns.github.io/2017/03/12/2017华为云平台NFV教程笔记/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="NFV技术概述与发展趋势CT当前面临的结构性挑战A.增收面临结构性挑战：电信业用户数饱和，传统业务下滑。
+B.节流面临结构性挑战：在CT行业投入成本下降的情况下，IT部分的投入持续增长。
+C.创新面临结构性挑战：CT业一年有5个业务创新，IT业的业务创新一年能达到16w个。商用速度上，CT业每月6个上市，IT业每小时12个上市。
+万物互联，IT与CT融合，诞生了NFV。
+什么是NFVNFV，Net">
+<meta property="og:updated_time" content="2017-03-12T03:19:33.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017华为云平台NFV教程笔记">
+<meta name="twitter:description" content="NFV技术概述与发展趋势CT当前面临的结构性挑战A.增收面临结构性挑战：电信业用户数饱和，传统业务下滑。
+B.节流面临结构性挑战：在CT行业投入成本下降的情况下，IT部分的投入持续增长。
+C.创新面临结构性挑战：CT业一年有5个业务创新，IT业的业务创新一年能达到16w个。商用速度上，CT业每月6个上市，IT业每小时12个上市。
+万物互联，IT与CT融合，诞生了NFV。
+什么是NFVNFV，Net">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NFV技术概述与发展趋势"><span class="toc-text">NFV技术概述与发展趋势</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CT当前面临的结构性挑战"><span class="toc-text">CT当前面临的结构性挑战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是NFV"><span class="toc-text">什么是NFV</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFV将IT基因融入电信网络"><span class="toc-text">NFV将IT基因融入电信网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFV正在走向成熟"><span class="toc-text">NFV正在走向成熟</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NFV-网络架构"><span class="toc-text">NFV 网络架构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NFV生态系统"><span class="toc-text">NFV生态系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFV框架"><span class="toc-text">NFV框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-NFVI："><span class="toc-text">1.NFVI：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-虚拟网络功能"><span class="toc-text">2.虚拟网络功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-网络管理层和网管"><span class="toc-text">3.网络管理层和网管</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFV三大组件关键要求"><span class="toc-text">NFV三大组件关键要求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-组件MANO-NFVO-VNFM-VIM"><span class="toc-text">1.组件MANO(NFVO+VNFM+VIM)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-组件VNF-虚拟化网络功能"><span class="toc-text">2.组件VNF 虚拟化网络功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-组件NFVI-云操作系统"><span class="toc-text">3.组件NFVI 云操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-组件NFVI硬件"><span class="toc-text">4.组件NFVI硬件</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NFV关键能力"><span class="toc-text">NFV关键能力</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#开放"><span class="toc-text">开放</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#云化架构-虚拟化-云化"><span class="toc-text">云化架构(虚拟化!=云化)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#弹性"><span class="toc-text">弹性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高可靠性"><span class="toc-text">高可靠性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#高性能"><span class="toc-text">高性能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NFV存在的问题"><span class="toc-text">NFV存在的问题</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-2017华为云平台NFV教程笔记" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">2017华为云平台NFV教程笔记</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/03/12/2017华为云平台NFV教程笔记/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="NFV技术概述与发展趋势"><a href="#NFV技术概述与发展趋势" class="headerlink" title="NFV技术概述与发展趋势"></a>NFV技术概述与发展趋势</h1><h2 id="CT当前面临的结构性挑战"><a href="#CT当前面临的结构性挑战" class="headerlink" title="CT当前面临的结构性挑战"></a>CT当前面临的结构性挑战</h2><p>A.增收面临结构性挑战：电信业用户数饱和，传统业务下滑。</p>
+<p>B.节流面临结构性挑战：在CT行业投入成本下降的情况下，IT部分的投入持续增长。</p>
+<p>C.创新面临结构性挑战：CT业一年有5个业务创新，IT业的业务创新一年能达到16w个。商用速度上，CT业每月6个上市，IT业每小时12个上市。</p>
+<p>万物互联，IT与CT融合，诞生了NFV。</p>
+<h2 id="什么是NFV"><a href="#什么是NFV" class="headerlink" title="什么是NFV"></a>什么是NFV</h2><p>NFV，Network Functions Virtualization 网络功能虚拟化，是在ETSI组织下组建的产业标准组织，希望通过采用通用服务器、交换机和存储设备到达实现传统电信网络的功能。通过借助IT的虚拟化技术，许多类型的网络设备可以合并到工业标准中，如servers、switches和storage，可以部署在数据中心、网络节点或者是用户家里，这需要网络功能以软件方式实现，并能在一系列的工业标准服务器硬件上运行，可以根据需要进行迁移、实例化，部署在网络的不同位置，无需安装新设备。</p>
+<p>关键诉求包括基于标准的大容量Server，存储和大容量以太网，不同Vendor提供的应用以软件的形式远程自动部署在统一的基础设施上。</p>
+<p>NFV的三个关键点是：软硬件解耦、开放、自动化。</p>
+<h2 id="NFV将IT基因融入电信网络"><a href="#NFV将IT基因融入电信网络" class="headerlink" title="NFV将IT基因融入电信网络"></a>NFV将IT基因融入电信网络</h2><p>传统电信网络由于软件硬件绑定，更新困难，多厂家异构的专有硬件以及烟囱式的网络造成了管理维护的困难，采用虚拟化技术和云计算的目标网络，硬件采用标准的服务器、存储和交换机，通过虚拟化之后，上层的业务通过软件形式，运行在统一的标准的硬件基础上，从而带来很多好处。</p>
+<p>由于软硬件解耦，网络功能虚拟化易于更新，硬件通用化，支持异构，资源归一，简化管理和运维。</p>
+<h2 id="NFV正在走向成熟"><a href="#NFV正在走向成熟" class="headerlink" title="NFV正在走向成熟"></a>NFV正在走向成熟</h2><p>NFV发展曲线说明NFV正在趋于成熟，伴随着一系列的架构标准的建立及稳定。</p>
+<h1 id="NFV-网络架构"><a href="#NFV-网络架构" class="headerlink" title="NFV 网络架构"></a>NFV 网络架构</h1><h2 id="NFV生态系统"><a href="#NFV生态系统" class="headerlink" title="NFV生态系统"></a>NFV生态系统</h2><p>相关标准组织：</p>
+<p>1.ETSI在2012年成立了NFV ISG来研究网络功能虚拟化。</p>
+<p>2.OpenSource组织：OPNFV、OpenStack等。</p>
+<p>NFV产业联盟秉承开发、创新、协同、落地的宗旨，集多厂商和合作伙伴进行联合创新，成为开放联盟的引领者。</p>
+<p>业界和领先运营商对NFV的认可，积极拥抱NFV，如：Current Analysis；华为的Telifonica；Vodafone；德国电信；Orange等。</p>
+<p>Vodafone业界首个NFV商用节点，基础设施、操作系统和应用软件分别使用惠普、VMware和华为多厂商环境，通过华为进行系统集成，构造电信级别的SLA保障和NFV网络。</p>
+<h2 id="NFV框架"><a href="#NFV框架" class="headerlink" title="NFV框架"></a>NFV框架</h2><p>NFV框架包括三大组件：NFVI、VNF和MANO。</p>
+<h3 id="1-NFVI："><a href="#1-NFVI：" class="headerlink" title="1.NFVI："></a>1.NFVI：</h3><p>硬件和云操作系统。</p>
+<p>框架中最底层的是硬件，包括计算、存储和网络资源；往上是云操作系统，完成虚拟化和云化的相关功能。</p>
+<p>I意指设施，这些设施均有VIM进行管理。</p>
+<h3 id="2-虚拟网络功能"><a href="#2-虚拟网络功能" class="headerlink" title="2.虚拟网络功能"></a>2.虚拟网络功能</h3><p>如vIMS提供IMS的语言服务，vEPC提供4G的数据网络功能。</p>
+<p>虚拟网络功能由VNFM来管理，提供VNF的生命周期管理。</p>
+<h3 id="3-网络管理层和网管"><a href="#3-网络管理层和网管" class="headerlink" title="3.网络管理层和网管"></a>3.网络管理层和网管</h3><p>网管可以配套NFVO进行网络业务生命周期的管理。</p>
+<h2 id="NFV三大组件关键要求"><a href="#NFV三大组件关键要求" class="headerlink" title="NFV三大组件关键要求"></a>NFV三大组件关键要求</h2><h3 id="1-组件MANO-NFVO-VNFM-VIM"><a href="#1-组件MANO-NFVO-VNFM-VIM" class="headerlink" title="1.组件MANO(NFVO+VNFM+VIM)"></a>1.组件MANO(NFVO+VNFM+VIM)</h3><p>a.VNFM适配不同厂商NFVO和VIM</p>
+<p>b.MANO系统应该尽量减小对现有OSS/BSS冲击</p>
+<p>如要求MANO支持和现有传统平台的对接。</p>
+<h3 id="2-组件VNF-虚拟化网络功能"><a href="#2-组件VNF-虚拟化网络功能" class="headerlink" title="2.组件VNF 虚拟化网络功能"></a>2.组件VNF 虚拟化网络功能</h3><p>a.可以运行在不同厂商的NFVI</p>
+<p>b.对应传统电信业务网络，每个物理网元映射为一个虚拟网元VNF</p>
+<h3 id="3-组件NFVI-云操作系统"><a href="#3-组件NFVI-云操作系统" class="headerlink" title="3.组件NFVI 云操作系统"></a>3.组件NFVI 云操作系统</h3><p>a.优选基于OpenStack的云操作系统</p>
+<p>b.将物理计算/存储/交换资源通过虚拟化转换为虚拟的计算/存储/交换资源池</p>
+<h4 id="4-组件NFVI硬件"><a href="#4-组件NFVI硬件" class="headerlink" title="4.组件NFVI硬件"></a>4.组件NFVI硬件</h4><p>a.优选使用具有虚拟化辅助功能的芯片的COTS</p>
+<p>b.同时具备高IOPS与高可靠性的磁阵</p>
+<p>c.低RAID等级的磁阵建议冗余组网</p>
+<h1 id="NFV关键能力"><a href="#NFV关键能力" class="headerlink" title="NFV关键能力"></a>NFV关键能力</h1><p>解决业务网络的自动部署问题，是一个巨型的ICT系统集成工程。</p>
+<h2 id="开放"><a href="#开放" class="headerlink" title="开放"></a>开放</h2><p>开放的能力是指虚拟化网络功能运行在多厂商云平台，表现在广泛兼容、性能稳定和支持异构三方面。</p>
+<p>NFV网络在商用之前通过测试多种硬件而稳定运行。</p>
+<p>另外NFV支持异构，比如在硬件基础上，我们可以支持厂商B的VNFM和厂商A的NFVO，并且可以和现网的传统平台进行异构系统集成。</p>
+<p>NFV平台必须是一个开放共享的环境，能够运行来自不同厂商的应用，广泛兼容不同厂商的硬件以及云化的操作系统。</p>
+<h2 id="云化架构-虚拟化-云化"><a href="#云化架构-虚拟化-云化" class="headerlink" title="云化架构(虚拟化!=云化)"></a>云化架构(虚拟化!=云化)</h2><p><strong>云化架构是弹性和可靠性的基础。</strong>传统平台软件硬件绑定；在虚拟化阶段，软件硬件进行解耦，软件可以运行在标准的硬件基础上，但是业务逻辑和业务数据仍然还是绑定的。</p>
+<p>NFV应用平台必须为开发者提供网络功能和子功能部署的精细化控制能力，基于运营商策略和资源的可用性，自动发现工作负载所应在的最佳位置，还需要将分布式数据中心和网络作为一个单一的虚拟云来管理，这使得运维人员可以管理来自各种输入源的事件，以便实时的对整个云平台进行分析和监控，进而提升决策效率。</p>
+<p>在云化架构阶段，软件硬件继续解耦，同时<strong>业务逻辑和业务数据进行了解耦，会话转发层和业务逻辑进行了解耦。</strong></p>
+<p>eg.CSCF</p>
+<p>会话转发层有CSDPU虚拟机负责收发报文，业务逻辑层有CSSCU虚拟机负责处理业务逻辑，业务数据层有CSRDB虚拟机负责保存用户业务的数据，如稳态呼叫会话数据。</p>
+<p>用户的业务数据保存在不同的主RDB上，主RDB同步给备RDB，做到分布式的数据库弹性部署，同时支持主备冗余备份可靠性。</p>
+<h2 id="弹性"><a href="#弹性" class="headerlink" title="弹性"></a>弹性</h2><p>分钟级的弹性扩容和秒级弹性缩容。</p>
+<p>当业务量需要增加的时候，由主RDB生成新的虚拟机来支持更多的业务处理，RDB中就保留了动态数据，如用户签约数据等。用动态数据可以生成新的VM来支持业务需要。</p>
+<p>当业务量下降的时候，如夜晚，用户呼叫量下降，可以将业务迁移到其他虚拟机，并对相应虚拟机设备下电，减少虚拟机设备的运行，而稳态话务可以立即在其他模块中重建。</p>
+<h2 id="高可靠性"><a href="#高可靠性" class="headerlink" title="高可靠性"></a>高可靠性</h2><p>不论应用层、云操作系统层还是硬件层，都有相应的冗余机制。</p>
+<p>应用层高可靠性可以通过<strong>主备和LB方式</strong>实现主备VM之间的冗余，<strong>主备方式冗余机制</strong>就是当主虚拟机故障了，备用虚拟机自动接管业务；另一种就是<strong>无状态的N+M冗余机制</strong>，当负荷分担的N个虚拟机中有谁故障了，其他M各虚拟机自动接管。</p>
+<p>云操作系统可靠性可以通过<strong>虚拟机快速重建冗余机制</strong>来实现，虚拟机故障之后通过新生成的虚拟机接管故障虚拟机的业务。</p>
+<p>硬件层高可靠性主要通过<strong>簇化以及物料冗余机制</strong>实现计算、存储、网络等硬件设备的冗余。当某一网元，如服务器故障之后，其他冗余资源将自动接管。</p>
+<p>硬件层、VM层、业务层各层的可靠性各自独立，确保应用层会话零中断及资源永远可用，实现电信级五个9的可用性和可靠性。</p>
+<h2 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h2><p>NFV业界权威评估公司SPECvirt评估，华为的FusionSphere性能得分为4.6分，排名第一。在呼叫处理能力方面，华为FusionSphere比第二名VMware高出17%。</p>
+<p>高性能优化会用到很多关键技术，比如NUMA亲和性、CPU绑定、DPDK、透明巨页、虚拟中断优化等等。</p>
+<h2 id="NFV存在的问题"><a href="#NFV存在的问题" class="headerlink" title="NFV存在的问题"></a>NFV存在的问题</h2><p>1.NFV标准不成熟</p>
+<p>2.多供应商，集成复杂</p>
+<p>3.部件兼容性风险大</p>
+<p>NFV只定义架构层次，各个层次接口的标准是由其他开源或者技术组织来实现，多厂家设备不兼容性的风险大。</p>
+<p>4.NFV工程难度大</p>
+<p>5.网络虚拟化技术滞后</p>
+<p>6.虚拟化可靠性不够</p>
+<p>目前达不到5个9的电信级可靠性。</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/11/2017华为云平台SDN教程笔记/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/03/12/2017华为云平台NFV教程笔记/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
