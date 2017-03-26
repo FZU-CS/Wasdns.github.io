@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenBox | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SDN," />
+  
+
+  <meta name="description" content="OpenBox: Enabling Innovation in MiddleBox ApplicationsStructure:Abstract
+1.Introduction
+2.Related Work
+3.Unified Processing
+ -3.1.Unifying Processing Stages -3.2.Enhanced Performance -3.3.Dependencies">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenBox">
+<meta property="og:url" content="https://wasdns.github.io/2017/03/26/OpenBox/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="OpenBox: Enabling Innovation in MiddleBox ApplicationsStructure:Abstract
+1.Introduction
+2.Related Work
+3.Unified Processing
+ -3.1.Unifying Processing Stages -3.2.Enhanced Performance -3.3.Dependencies">
+<meta property="og:updated_time" content="2017-03-26T07:41:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenBox">
+<meta name="twitter:description" content="OpenBox: Enabling Innovation in MiddleBox ApplicationsStructure:Abstract
+1.Introduction
+2.Related Work
+3.Unified Processing
+ -3.1.Unifying Processing Stages -3.2.Enhanced Performance -3.3.Dependencies">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenBox-Enabling-Innovation-in-MiddleBox-Applications"><span class="toc-text">OpenBox: Enabling Innovation in MiddleBox Applications</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Structure"><span class="toc-text">Structure:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract-and-Introduction"><span class="toc-text">Abstract and Introduction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Related-Work"><span class="toc-text">Related Work</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Unified-Processing"><span class="toc-text">Unified Processing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Unifying-Processing-Stages"><span class="toc-text">3.1 Unifying Processing Stages</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-Enhanced-Performance"><span class="toc-text">3.2 Enhanced Performance</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-Dependencies-and-Precedence"><span class="toc-text">3.3 Dependencies and Precedence</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-Room-for-Innovation"><span class="toc-text">3.4 Room for Innovation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-OpenBox-Architechture"><span class="toc-text">4.OpenBox Architechture</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-Data-Plane"><span class="toc-text">4.1 Data Plane</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-OpenBox-Protocol"><span class="toc-text">4.2 OpenBox Protocol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-3-Rules"><span class="toc-text">4.3 Rules</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-4-Controller-Plane"><span class="toc-text">4.4 Controller Plane</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-5-OpenBox-Applications"><span class="toc-text">4.5 OpenBox Applications</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Initial-Implementation"><span class="toc-text">5. Initial Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Conclusion-and-Future-Work"><span class="toc-text">6. Conclusion and Future Work</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-OpenBox" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">OpenBox</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.26</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/03/26/OpenBox/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="OpenBox-Enabling-Innovation-in-MiddleBox-Applications"><a href="#OpenBox-Enabling-Innovation-in-MiddleBox-Applications" class="headerlink" title="OpenBox: Enabling Innovation in MiddleBox Applications"></a>OpenBox: Enabling Innovation in MiddleBox Applications</h2><h3 id="Structure"><a href="#Structure" class="headerlink" title="Structure:"></a>Structure:</h3><p>Abstract</p>
+<p>1.Introduction</p>
+<p>2.Related Work</p>
+<p>3.Unified Processing</p>
+<p> -3.1.Unifying Processing Stages<br> -3.2.Enhanced Performance<br> -3.3.Dependencies and Precedence<br> -3.4.Room for Innovation</p>
+<p>4.OpenBox Architechture</p>
+<p>  -4.1.Data Plane<br>  -4.2.The OpenBox Protocol<br>  -4.3.Rules<br>  -4.4.Control Plane<br>  -4.5.OpenBox Applications</p>
+<p>5.Initial Implementation</p>
+<p>6.Conclusions and Future Work</p>
+<p>7.References</p>
+<h3 id="Abstract-and-Introduction"><a href="#Abstract-and-Introduction" class="headerlink" title="Abstract and Introduction"></a>Abstract and Introduction</h3><p>Key words: </p>
+<p>  1.Currently, a special box is <strong>tailored</strong> to provide each such function. These special boxes are usually <strong>proprietary</strong>, and operators control over them is <strong>limited</strong> to the set of <strong>capabilities</strong> defined by the provider of each box.</p>
+<p>  Note: introduced why OpenBox appeared.</p>
+<p>  2.In this paper we present OpenBox: a <strong>logically-centralized</strong> framework that makes advanced packet processing and monitoring easier, faster, more scalable, flexible, and innovative…</p>
+<p>  Note: logically-centralized framework; decouples the DP and CP on MiddleBox; unifies MiddleBox Applications by service instances.</p>
+<p>  3.decouples DP and CP =&gt; make life easier :P =&gt; “makes it easier to innovate both high-level applications and low-level data plane features”</p>
+<p>  Note: similarly to SDN.</p>
+<p>Table: see table 1</p>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><p>xOMB, Kekely, Gember, Sherry and so on.</p>
+<p>Related: P4.</p>
+<h3 id="Unified-Processing"><a href="#Unified-Processing" class="headerlink" title="Unified Processing"></a>Unified Processing</h3><p>1.Survey on MiddleBox Applications =&gt; Table 2</p>
+<p>2.Sample rules in MiddleBox =&gt; Table 3</p>
+<h4 id="3-1-Unifying-Processing-Stages"><a href="#3-1-Unifying-Processing-Stages" class="headerlink" title="3.1 Unifying Processing Stages"></a>3.1 Unifying Processing Stages</h4><p>key words: </p>
+<p>  1.middleboxes use some rule mechanism =&gt; see Table 2 as an example =&gt; <strong>Match &amp; Action</strong></p>
+<p>  Note: Match and Action.</p>
+<p>  2.Thus, matches define the behavior of ingress processing stages, while actions define the behavior of egress processing stages. =&gt; pipeline processing; </p>
+<p>  Note: pipeline</p>
+<p>  3.merge multiple rulesets to define the logic of a single logical middlebox application that fulfills the union of all.</p>
+<p>  Note: OpenBox =&gt; merge rulesets =&gt; performance++</p>
+<h4 id="3-2-Enhanced-Performance"><a href="#3-2-Enhanced-Performance" class="headerlink" title="3.2 Enhanced Performance"></a>3.2 Enhanced Performance</h4><p>Note: merge stages =&gt; a potential performance gain exists.</p>
+<h4 id="3-3-Dependencies-and-Precedence"><a href="#3-3-Dependencies-and-Precedence" class="headerlink" title="3.3 Dependencies and Precedence"></a>3.3 Dependencies and Precedence</h4><p>Key words:</p>
+<p>  1.The order in which a packet should go through multiple services or middlebox is usually called a policy chain or a service chain.</p>
+<p>  Note: a policy chain =&gt; processing in order </p>
+<p>  2.However, this may produce incorrect results in the cases when the result of one application (such as NAT) should be the input of a second application (such as a firewall).</p>
+<p>  Note: OpenBox =&gt; produce incorrect? “output as input” =&gt; multiple processing =&gt; solve the problem =&gt; that’s “dependencies”</p>
+<h4 id="3-4-Room-for-Innovation"><a href="#3-4-Room-for-Innovation" class="headerlink" title="3.4 Room for Innovation"></a>3.4 Room for Innovation</h4><p>Note: A lot of types of MiddleBox need to do.</p>
+<p>Table: see Table 4</p>
+<h3 id="4-OpenBox-Architechture"><a href="#4-OpenBox-Architechture" class="headerlink" title="4.OpenBox Architechture"></a>4.OpenBox Architechture</h3><h4 id="4-1-Data-Plane"><a href="#4-1-Data-Plane" class="headerlink" title="4.1 Data Plane"></a>4.1 Data Plane</h4><p>Key Words:</p>
+<p>  1.OpenBox service instances (OBIs): low-level processing entities =&gt; one or more stages of the unified processing</p>
+<p>  Note: what is OBI? ans: processing entities.</p>
+<p>  2.Each such OBI receives a processing graph (PG) and a set of processing rules from the OpenBox controller.</p>
+<p>  Note: PG(define the processing logic) + rules from Controller ==input==&gt; OBI</p>
+<p>4.1.1 Hardware or Software Implementation</p>
+<p>Note: general-purpose CPU or virtual machine; specialized hardware; programmable</p>
+<p>4.1.2 Multiple OBIs</p>
+<p>Key words:<br>  1.Each OBI may implement all or part of the required processing steps; metadata(network service header).</p>
+<p>  Note: pkt =&gt; OBI1 =&gt; pkt+metadata1 =&gt; OBI2 =&gt; pkt+metadata1+metadata2 =&gt; …</p>
+<p>  2.also to <strong>load-balance</strong> network resources such as links and servers.</p>
+<p>  Note: load balance</p>
+<h4 id="4-2-OpenBox-Protocol"><a href="#4-2-OpenBox-Protocol" class="headerlink" title="4.2 OpenBox Protocol"></a>4.2 OpenBox Protocol</h4><p>Note: the communication protocol between OBIs and the control plane; Messages =&gt; JSON</p>
+<h4 id="4-3-Rules"><a href="#4-3-Rules" class="headerlink" title="4.3 Rules"></a>4.3 Rules</h4><p>Note: rule = header match structure(specifies values) + payload match structure(patterns to be searched) + instructions set(actions) + priority + cookies = match + action </p>
+<h4 id="4-4-Controller-Plane"><a href="#4-4-Controller-Plane" class="headerlink" title="4.4 Controller Plane"></a>4.4 Controller Plane</h4><p>Key words:</p>
+<p>  1.The OpenBox controller (OBC): logically centralized software server; </p>
+<p>  2.Using the <strong>Box abstraction layer</strong> it exposes, OpenBox applications can be written on top of it to define the desired traffic monitoring and classification tasks in the network.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">OpenBox Applications: APP1 + APP2 + ...</div><div class="line">    |</div><div class="line">(Box Abstraction Layer, BAL)</div><div class="line">    |</div><div class="line">Control Plane: OBC1 + OBC2 + ... + OBCN</div><div class="line">    |</div><div class="line">(OpenBox Protocol)</div><div class="line">    |</div><div class="line">Data Plane: OBI1 + OBI2 + ... + OBIN</div></pre></td></tr></table></figure>
+<p>  Note:<br>  (1) OBA = specifies a processing path + rules;<br>  (2) BAL = a set of classes and interfaces<br>  (3) OBC = Target Specific OpenFlow Controller</p>
+<p>  OBC -&gt; PG -&gt; OBI; OBI -&gt; status -&gt; OBC</p>
+<h4 id="4-5-OpenBox-Applications"><a href="#4-5-OpenBox-Applications" class="headerlink" title="4.5 OpenBox Applications"></a>4.5 OpenBox Applications</h4><p>Note:</p>
+<p>(1) Each processing step produces <strong>metadata</strong> that may be used by later steps.</p>
+<p>(2) Box applications are mostly <strong>proactive</strong> =&gt; preserve high performance = request to DP frequently.</p>
+<p>(3) session analyzer =&gt; <strong>State Management</strong></p>
+<p>(4) <strong>Content Storage</strong></p>
+<h3 id="5-Initial-Implementation"><a href="#5-Initial-Implementation" class="headerlink" title="5. Initial Implementation"></a>5. Initial Implementation</h3><p>Note:</p>
+<p>OpenBox Framework =&gt; <a href="https://github.com/" target="_blank" rel="external">https://github.com/</a> DeepnessLab/moonlight</p>
+<p>OBI =&gt; <a href="https://github.com/DeepnessLab/obsi" target="_blank" rel="external">https://github.com/DeepnessLab/obsi</a></p>
+<h3 id="6-Conclusion-and-Future-Work"><a href="#6-Conclusion-and-Future-Work" class="headerlink" title="6. Conclusion and Future Work"></a>6. Conclusion and Future Work</h3><p>Note:</p>
+<p>1.provide more flexible and scalable development and deployment of applications with the same roles, and allow innovative solutions to be easily created.</p>
+<p>2.allow all vendor element.</p>
+<p>Chen, 2017.3.26</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/17/nowcode-运维错题-1/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/03/26/OpenBox/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
