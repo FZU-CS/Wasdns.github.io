@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>A Survey on Deep Packet Inspection for Intrusion Detection Systems | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="DPI," />
+  
+
+  <meta name="description" content="A Survey on Deep Packet Inspection for Intrusion Detection SystemsStructureAbstract
+1.Introduction
+2.Challenges and Goals
+
+2.1.Deep Packet Inspection Challenges
+1.The search algorithm complexity
+2.Inc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Survey on Deep Packet Inspection for Intrusion Detection Systems">
+<meta property="og:url" content="https://wasdns.github.io/2017/03/30/A-Survey-on-Deep-Packet-Inspection-for-Intrusion-Detection-Systems/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="A Survey on Deep Packet Inspection for Intrusion Detection SystemsStructureAbstract
+1.Introduction
+2.Challenges and Goals
+
+2.1.Deep Packet Inspection Challenges
+1.The search algorithm complexity
+2.Inc">
+<meta property="og:updated_time" content="2017-03-30T15:24:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Survey on Deep Packet Inspection for Intrusion Detection Systems">
+<meta name="twitter:description" content="A Survey on Deep Packet Inspection for Intrusion Detection SystemsStructureAbstract
+1.Introduction
+2.Challenges and Goals
+
+2.1.Deep Packet Inspection Challenges
+1.The search algorithm complexity
+2.Inc">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Survey-on-Deep-Packet-Inspection-for-Intrusion-Detection-Systems"><span class="toc-text">A Survey on Deep Packet Inspection for Intrusion Detection Systems</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Structure"><span class="toc-text">Structure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract-and-Introduction"><span class="toc-text">Abstract and Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges-and-Goals"><span class="toc-text">Challenges and Goals</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Challenges"><span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Design-Objectives"><span class="toc-text">Design Objectives</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Software-DPI-Systems"><span class="toc-text">Software DPI Systems</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hardware-Design"><span class="toc-text">Hardware Design</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-A-Survey-on-Deep-Packet-Inspection-for-Intrusion-Detection-Systems" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">A Survey on Deep Packet Inspection for Intrusion Detection Systems</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.03.30</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/03/30/A-Survey-on-Deep-Packet-Inspection-for-Intrusion-Detection-Systems/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="A-Survey-on-Deep-Packet-Inspection-for-Intrusion-Detection-Systems"><a href="#A-Survey-on-Deep-Packet-Inspection-for-Intrusion-Detection-Systems" class="headerlink" title="A Survey on Deep Packet Inspection for Intrusion Detection Systems"></a>A Survey on Deep Packet Inspection for Intrusion Detection Systems</h1><h2 id="Structure"><a href="#Structure" class="headerlink" title="Structure"></a>Structure</h2><p>Abstract</p>
+<p>1.Introduction</p>
+<p>2.Challenges and Goals</p>
+<ul>
+<li><p>2.1.Deep Packet Inspection Challenges</p>
+<p>1.The search algorithm complexity</p>
+<p>2.Increasing number of intruder signature</p>
+<p>3.The overlapping of signatures</p>
+<p>4.The Location of signature unknown</p>
+<p>5.Encrypted Data</p>
+</li>
+<li><p>2.2.DPI Design Objectives</p>
+<p>1.Deterministic performance</p>
+<p>2.Memory efficiency</p>
+<p>3.Dynamic update</p>
+<p>4.Signatures</p>
+<p>5.Scalability</p>
+<p>6.Additional functions</p>
+</li>
+</ul>
+<p>3.Software Deep packet Inspection systems</p>
+<ul>
+<li>3.1.SNORT Intrusion Detection System</li>
+</ul>
+<p>4.Hardware Implementation</p>
+<ul>
+<li>4.1.Matching Algorithms</li>
+<li>4.2.Bloom Filter</li>
+<li>4.3.Content Addressable Memory</li>
+<li>4.4.TCAM implementations</li>
+<li>4.5.Multi-core Processors Implementations</li>
+</ul>
+<p>5.Finite State Machine</p>
+<ul>
+<li>5.1.Nondeterministic Finite Automata</li>
+<li>5.2.Deterministic Finite Automata</li>
+</ul>
+<p>6.Comparison between Existing Modules and Implementations</p>
+<p>7.Conclusion </p>
+<p>References</p>
+<h2 id="Abstract-and-Introduction"><a href="#Abstract-and-Introduction" class="headerlink" title="Abstract and Introduction"></a>Abstract and Introduction</h2><p>Deep packet inspection: for inspecting, deterring and deflecting malicious attacks over the network. =&gt; network security</p>
+<p>env: the enormous attacks =&gt; need to protect data =&gt; security methods</p>
+<p>viruses + spam … ==attack==&gt; cryptographic system (first defense) ==attack==&gt; IDS and IPS: intrusion prevention systems (second defense)</p>
+<p>DPI = essential inspector =&gt; inspect attacks in all the layers nowadays</p>
+<p>Two main categories in IDS(intrusion detection systems): (1)<strong>efficient data structure</strong> with optimized memory access rate (2)<strong>high throughput algorithm</strong> to process intruder signature</p>
+<h2 id="Challenges-and-Goals"><a href="#Challenges-and-Goals" class="headerlink" title="Challenges and Goals"></a>Challenges and Goals</h2><h3 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h3><p>Five Challenges:</p>
+<p><strong>1.The search algorithm complexity</strong></p>
+<p>high complexity =&gt; <strong>low throughput</strong> =&gt; the main focus point in DPI </p>
+<p><strong>2.Increasing number of intruder signature</strong></p>
+<p>the verity of attacks =&gt; the needs for <strong>new intruder signature</strong> increase </p>
+<p><strong>3.The overlapping of signatures(签名重叠)</strong></p>
+<p>the signatures of attacks <strong>not general</strong> =&gt; can be categorized into groups, eg.http pkt has 1096 signatures </p>
+<p>=&gt; process the packets before matching process</p>
+<p><strong>4.The Location of signature unknown</strong></p>
+<p>attacks: verity types on different types of apps =&gt; a lot of kinds of attacks</p>
+<p>=&gt; intruder pattern not localized =&gt; IDS must inspect <strong>all the packet payload</strong></p>
+<p><strong>5.Encrypted Data</strong></p>
+<p>the encrypted data =&gt; cannot be inspected by DPI </p>
+<p><strong>Two main requirements of DPI system:</strong></p>
+<p>(1)high speed of processing =&gt; <strong>performance</strong></p>
+<p>(2)low cost =&gt; <strong>resources allocation</strong></p>
+<h3 id="Design-Objectives"><a href="#Design-Objectives" class="headerlink" title="Design Objectives"></a>Design Objectives</h3><p><strong>1.Deterministic(确定性的) Performance</strong></p>
+<p>operate and process traffic stream <strong>independently</strong> of signature characteristics or traffic characteristics</p>
+<p>system have to manage traffic <strong>in worst case</strong></p>
+<p><strong>2.Memory efficiency: memory access time</strong></p>
+<p>The main <strong>bottlenecks</strong> in DPI sys.</p>
+<p><strong>3.Dynamic update</strong></p>
+<p>the hardware can be configured at runtime.</p>
+<p><strong>4.Signatures</strong></p>
+<p><strong>5.Scalability</strong>: crucial in hardware based system</p>
+<p><strong>6.Additional functions</strong></p>
+<h3 id="Software-DPI-Systems"><a href="#Software-DPI-Systems" class="headerlink" title="Software DPI Systems"></a>Software DPI Systems</h3><p>SNORT, Bro, Linux L7-filter.</p>
+<ul>
+<li><p>IDS: SNORT, Bro.</p>
+</li>
+<li><p>Application: Linux L7-filter.</p>
+</li>
+</ul>
+<p>SNORT: Network intrusion detection system. <a href="http://www.snort.org/" target="_blank" rel="external">http://www.snort.org/</a>.</p>
+<p>Bro: Intrusion detection system. <a href="http://www.bro-" target="_blank" rel="external">http://www.bro-</a> ids.org/.</p>
+<p>L7-filter: Application layer packet classifier. <a href="http://l7-filter.sourceforge.net/" target="_blank" rel="external">http://l7-filter.sourceforge.net/</a>.</p>
+<h3 id="Hardware-Design"><a href="#Hardware-Design" class="headerlink" title="Hardware Design"></a>Hardware Design</h3><p>See the paper for more informations. </p>
+<p>Hardware Implementation; Finite State Machine.</p>
+<p>Chen, 2017.3.30</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/26/OpenBox/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/03/30/A-Survey-on-Deep-Packet-Inspection-for-Intrusion-Detection-Systems/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
