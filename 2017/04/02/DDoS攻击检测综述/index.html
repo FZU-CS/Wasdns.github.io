@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>DDoS攻击检测综述 | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="security," />
+  
+
+  <meta name="description" content="DDoS攻击检测综述结构Abstract
+0.引言
+1.DDoS攻击的研究现状
+2.DDoS攻击检测方法 
+
+2.1 按检测模式分类的检测方法
+2.2 按算法部署位置分类的检测方法
+2.3 目的端检测
+2.4 DDoS攻击检测系统的体系结构
+
+3.DDoS攻击检测方法的分析
+4.结束语
+Ch1 DDoS攻击的研究现状DDoS攻击的研究主要在预防、检测、响应追踪三个方面。
+第一道防线：攻击预防。在攻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DDoS攻击检测综述">
+<meta property="og:url" content="https://wasdns.github.io/2017/04/02/DDoS攻击检测综述/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="DDoS攻击检测综述结构Abstract
+0.引言
+1.DDoS攻击的研究现状
+2.DDoS攻击检测方法 
+
+2.1 按检测模式分类的检测方法
+2.2 按算法部署位置分类的检测方法
+2.3 目的端检测
+2.4 DDoS攻击检测系统的体系结构
+
+3.DDoS攻击检测方法的分析
+4.结束语
+Ch1 DDoS攻击的研究现状DDoS攻击的研究主要在预防、检测、响应追踪三个方面。
+第一道防线：攻击预防。在攻">
+<meta property="og:updated_time" content="2017-04-02T07:33:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DDoS攻击检测综述">
+<meta name="twitter:description" content="DDoS攻击检测综述结构Abstract
+0.引言
+1.DDoS攻击的研究现状
+2.DDoS攻击检测方法 
+
+2.1 按检测模式分类的检测方法
+2.2 按算法部署位置分类的检测方法
+2.3 目的端检测
+2.4 DDoS攻击检测系统的体系结构
+
+3.DDoS攻击检测方法的分析
+4.结束语
+Ch1 DDoS攻击的研究现状DDoS攻击的研究主要在预防、检测、响应追踪三个方面。
+第一道防线：攻击预防。在攻">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DDoS攻击检测综述"><span class="toc-text">DDoS攻击检测综述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#结构"><span class="toc-text">结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ch1-DDoS攻击的研究现状"><span class="toc-text">Ch1 DDoS攻击的研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ch2-DDoS攻击检测方法"><span class="toc-text">Ch2 DDoS攻击检测方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-按检测模式分类的检测方法"><span class="toc-text">2.1 按检测模式分类的检测方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-基于误用的DDoS检测"><span class="toc-text">2.1.1 基于误用的DDoS检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-基于异常的DDoS检测"><span class="toc-text">2.1.2 基于异常的DDoS检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-混合模式DDoS检测"><span class="toc-text">2.1.3 混合模式DDoS检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-4-分析"><span class="toc-text">2.1.4 分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-按算法部署位置分类的检测方法"><span class="toc-text">2.2 按算法部署位置分类的检测方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-源端检测"><span class="toc-text">2.2.1 源端检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-中间网络检测"><span class="toc-text">2.2.2 中间网络检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-目的端检测"><span class="toc-text">2.2.3 目的端检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-4-分析"><span class="toc-text">2.2.4 分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-其他检测方法和相关研究"><span class="toc-text">2.3 其他检测方法和相关研究</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-DDoS攻击检测系统的体系结构"><span class="toc-text">2.4 DDoS攻击检测系统的体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-DDoS攻击检测方法的分析"><span class="toc-text">3 DDoS攻击检测方法的分析</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-DDoS攻击检测综述" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">DDoS攻击检测综述</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.04.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/04/02/DDoS攻击检测综述/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="DDoS攻击检测综述"><a href="#DDoS攻击检测综述" class="headerlink" title="DDoS攻击检测综述"></a>DDoS攻击检测综述</h1><h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>Abstract</p>
+<p>0.引言</p>
+<p>1.DDoS攻击的研究现状</p>
+<p>2.DDoS攻击检测方法 </p>
+<ul>
+<li>2.1 按检测模式分类的检测方法</li>
+<li>2.2 按算法部署位置分类的检测方法</li>
+<li>2.3 目的端检测</li>
+<li>2.4 DDoS攻击检测系统的体系结构</li>
+</ul>
+<p>3.DDoS攻击检测方法的分析</p>
+<p>4.结束语</p>
+<h2 id="Ch1-DDoS攻击的研究现状"><a href="#Ch1-DDoS攻击的研究现状" class="headerlink" title="Ch1 DDoS攻击的研究现状"></a>Ch1 DDoS攻击的研究现状</h2><p>DDoS攻击的研究主要在预防、检测、响应追踪三个方面。</p>
+<p><strong>第一道防线：攻击预防</strong>。在攻击尚未发生时采取措施,阻止攻击者发起DDoS攻击进而危害网络。</p>
+<p>eg.提高TCP/IP协议的质量、SYN cookie技术；安全措施加固，如FUD等。</p>
+<p>当攻击真的发生时需要进行响应：<strong>响应追踪的目的是消除或缓解攻击, 尽量减小攻击对网络造成的危害。</strong></p>
+<p>分为：攻击发生时追踪 和 攻击发生后追踪。</p>
+<p>攻击发生时追踪：IPSec的动态安全关联追踪法、链路测试法、逐跳追踪法。</p>
+<p>攻击发生后追踪：ICMP追踪消息法、分组标记法、数据 包日志记录法。</p>
+<p>为了尽快响应攻击, 就需要尽快地检测出攻击的存在。</p>
+<h2 id="Ch2-DDoS攻击检测方法"><a href="#Ch2-DDoS攻击检测方法" class="headerlink" title="Ch2 DDoS攻击检测方法"></a>Ch2 DDoS攻击检测方法</h2><h3 id="2-1-按检测模式分类的检测方法"><a href="#2-1-按检测模式分类的检测方法" class="headerlink" title="2.1 按检测模式分类的检测方法"></a>2.1 按检测模式分类的检测方法</h3><h4 id="2-1-1-基于误用的DDoS检测"><a href="#2-1-1-基于误用的DDoS检测" class="headerlink" title="2.1.1 基于误用的DDoS检测"></a>2.1.1 基于误用的DDoS检测</h4><p><strong>基于误用的 DDoS 攻击检测：</strong></p>
+<p>指<strong>事先收集已有 DDoS 攻击的各种特征</strong>, 然后将当前网络中数据包的特征和各种攻击特征相互比较, 如果特征匹配则发现 DDoS 攻击。</p>
+<p>主要是利用了特征匹配、模型推理、状态转换和专家系统的方法：</p>
+<ul>
+<li>特征匹配 </li>
+</ul>
+<p>主要是利用各种 DDoS 的特征进行检测。只要将 已知攻击的特征输入特征库就可以迅速地检测出攻击是否存在。</p>
+<ul>
+<li>模型推理 </li>
+</ul>
+<p>也是利用 DDoS 攻击的特征进行检测，将已知DDoS的各种特征作为基础建立一个攻击特征库, 对包含这些特征的行为进行监视, 并判断出网络中是否出现已知攻击。</p>
+<ul>
+<li>状态转换 </li>
+</ul>
+<p>将 DDoS 攻击看成被系统监测的一系列系统状态转换和相对应的条件, 攻击事件与系统状态不要求一一对应。</p>
+<ul>
+<li>专家系统</li>
+</ul>
+<p>将专家关于 DDoS 攻击检测的知识转换成特征库中的特征与规则, 是知识检测中运用最多的一种方法。</p>
+<h4 id="2-1-2-基于异常的DDoS检测"><a href="#2-1-2-基于异常的DDoS检测" class="headerlink" title="2.1.2 基于异常的DDoS检测"></a>2.1.2 基于异常的DDoS检测</h4><p><strong>基于异常的 DDoS 攻击检测:</strong></p>
+<p>指通过<strong>监视系统审计记录上系统使用的异常情况</strong>, 可以检测出违反安全的事件。</p>
+<p>主要包括统计检测、模式预测、人工智能检测、机器学习检测四种方法。</p>
+<ul>
+<li>统计检测</li>
+</ul>
+<p>当 DDoS 攻击发生时, 网络中会出现流量突增并超过正常工作时极限流量的现象。很多 DDoS 攻击检测手段是<strong>用统计的方法计算出网络正常工作时流量的阈值</strong>, 然后与当前网络流量进行比较, 如果当前网络流量<strong>超过了阈值</strong>则说明可能发生了 DDoS 攻击。</p>
+<ul>
+<li>模式预测</li>
+</ul>
+<p>模式预测就是通过分析<strong>攻击发生前必然发生的一些现象</strong>来判断是否发生了 DDoS 攻击。</p>
+<p>eg.每次攻击发生前夕, 攻击者要解析受害者的主机名, 因此网络中就会出现<strong>大量的地址解析请求</strong>, 如果解析后发现同一个主机名称出现过多的话, 则可能发生攻击。</p>
+<ul>
+<li>人工智能检测</li>
+</ul>
+<p>基于人工智能的检测方法主要包括数据挖掘、人工神经网 络和模糊理论等</p>
+<ul>
+<li>机器学习检测</li>
+</ul>
+<p>使用机器学习的方法实现 DDoS 攻击的检测也是可行的。</p>
+<h4 id="2-1-3-混合模式DDoS检测"><a href="#2-1-3-混合模式DDoS检测" class="headerlink" title="2.1.3 混合模式DDoS检测"></a>2.1.3 混合模式DDoS检测</h4><p><strong>混合模式 DDoS 攻击检测：</strong></p>
+<p>将误用 DDoS 攻击检测和异常 DDoS 攻击检测两种方式混合使用。</p>
+<h4 id="2-1-4-分析"><a href="#2-1-4-分析" class="headerlink" title="2.1.4 分析"></a>2.1.4 分析</h4><p>基于误用的 DDoS 检测：建立负面行为模型，<strong>误报率低</strong>， 但存在检测率不高的问题，模型的维护开销较大，攻击特征的提取存在困难。</p>
+<p>基于异常的 DDoS 检测是建立正面行为模型, 检测率很高，但误报率也很高。<strong>异常检测模型最大的优点是可以检测出未知攻击。</strong></p>
+<h3 id="2-2-按算法部署位置分类的检测方法"><a href="#2-2-按算法部署位置分类的检测方法" class="headerlink" title="2.2 按算法部署位置分类的检测方法"></a>2.2 按算法部署位置分类的检测方法</h3><h4 id="2-2-1-源端检测"><a href="#2-2-1-源端检测" class="headerlink" title="2.2.1 源端检测"></a>2.2.1 源端检测</h4><p>源端 DDoS 攻击检测指的是<strong>将检测算法布置在发出攻击数据包的主机所处网络的边界路由器上</strong>。将DDoS攻击检测系统部署在源端, 可以使得攻击数据流在进入网络之前被阻止。</p>
+<h4 id="2-2-2-中间网络检测"><a href="#2-2-2-中间网络检测" class="headerlink" title="2.2.2 中间网络检测"></a>2.2.2 中间网络检测</h4><p>中间网络 DDoS 攻击检测是指将攻击检测算法部署在整个网络上, 包括路由器、交换机或其他网络设备。</p>
+<h4 id="2-2-3-目的端检测"><a href="#2-2-3-目的端检测" class="headerlink" title="2.2.3 目的端检测"></a>2.2.3 目的端检测</h4><p>目的端 DDoS 攻击检测是指将攻击检测算法部署在被攻击的主机和相关网络设备上。目前应用得最多的攻击检测都是在目的端(即受害端)进行的。</p>
+<p><strong>HCF方法</strong>：利用数据包<strong>从源端到达目的端所需要的跳数</strong>是不可改变的，将网络中特定服务器作为目的端，建立一张源地址和跳数相对应的表。</p>
+<h4 id="2-2-4-分析"><a href="#2-2-4-分析" class="headerlink" title="2.2.4 分析"></a>2.2.4 分析</h4><p>源端检测是<strong>最为理想的一种方法，能够在受害端受到攻击之前阻止攻击的发生，将攻击对网络的威胁降到最低</strong>。源地址被伪造的数据包很容易在源端检测出来。但是要求所有的网络服务提供商都安装源端检测算法显然<strong>不切实际</strong>，而且源端攻击包流量小，不易检测。</p>
+<p>中间网络检测比源端检测具有<strong>更好的可实施性和更低的覆盖要求</strong>。但也存在边界网关的修改、路由器的负载、缺乏网间合作等问题。</p>
+<p>目的端 DDoS 攻击检测是<strong>最容易的</strong>，因为目的端的攻击数据流量最大，并且最注重于对 DDoS 的防范。缺点是<strong>如果上游网络链接被阻塞的话, 目的端不管做什么也于事无补</strong>。</p>
+<h3 id="2-3-其他检测方法和相关研究"><a href="#2-3-其他检测方法和相关研究" class="headerlink" title="2.3 其他检测方法和相关研究"></a>2.3 其他检测方法和相关研究</h3><p>有无线的 DDoS 防御技术，也产生了相关主动检测 DDoS 攻击的技术，如利用蜜罐、蜜网进行 DDoS 攻击特征提取。</p>
+<h3 id="2-4-DDoS攻击检测系统的体系结构"><a href="#2-4-DDoS攻击检测系统的体系结构" class="headerlink" title="2.4 DDoS攻击检测系统的体系结构"></a>2.4 DDoS攻击检测系统的体系结构</h3><p>1.基于主机(host-based)型：检测系统能够在主机上运行。</p>
+<p>2.基于网络(network-based)型：在网络中检测流量。</p>
+<p>3.基于移动代理(agent-based)型：检测系统也需要分布式相互协作，要求具有自适应性、可扩展性等。</p>
+<h3 id="3-DDoS攻击检测方法的分析"><a href="#3-DDoS攻击检测方法的分析" class="headerlink" title="3 DDoS攻击检测方法的分析"></a>3 DDoS攻击检测方法的分析</h3><p>见表2、3.</p>
+<p>Chen, 2017.4.2</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/03/30/A-Survey-on-Deep-Packet-Inspection-for-Intrusion-Detection-Systems/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/04/02/DDoS攻击检测综述/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
