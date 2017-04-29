@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>NetFPGA-Related Paper-Overview 2013-2017 | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="NetFPGA," />
+  
+
+  <meta name="description" content="1.Implementation of TCP large receive offload on open hardware platform
+propose: open hardware platform of a stateless Large Receive Offload method (LRO)
+target: receiver processing power
+接收方处理数据的能力
+2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NetFPGA-Related Paper-Overview 2013-2017">
+<meta property="og:url" content="https://wasdns.github.io/2017/04/29/NetFPGA-Related-Paper-Overview-2013-2017/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="1.Implementation of TCP large receive offload on open hardware platform
+propose: open hardware platform of a stateless Large Receive Offload method (LRO)
+target: receiver processing power
+接收方处理数据的能力
+2">
+<meta property="og:updated_time" content="2017-04-29T03:07:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NetFPGA-Related Paper-Overview 2013-2017">
+<meta name="twitter:description" content="1.Implementation of TCP large receive offload on open hardware platform
+propose: open hardware platform of a stateless Large Receive Offload method (LRO)
+target: receiver processing power
+接收方处理数据的能力
+2">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-NetFPGA-Related-Paper-Overview-2013-2017" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">NetFPGA-Related Paper-Overview 2013-2017</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.04.29</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/04/29/NetFPGA-Related-Paper-Overview-2013-2017/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><strong>1.Implementation of TCP large receive offload on open hardware platform</strong></p>
+<p>propose: open hardware platform of a stateless Large Receive Offload method (LRO)</p>
+<p>target: receiver processing power</p>
+<p>接收方处理数据的能力</p>
+<p><strong>2.From 1G to 10G: code reuse in action</strong></p>
+<p>propose: new, flexible, legacy support mechanics for designs built using System on a Chip (SoC) and System on FPGA (SoFPGA).</p>
+<p>target: to make existing, systems reusable in this new, higher-speed scenario</p>
+<p>代码兼容性</p>
+<p><strong>3.PiBuffer: 面向数据中心的OpenFlow流缓存管理模型</strong></p>
+<p>propose: 支持流内报文保序的OpenFlow交换机流缓存管理模型。</p>
+<p>target: 缓解集中的控制平面，减少冗余packet-in次数，避免流内报文乱序。</p>
+<p>减轻CP处理压力</p>
+<p><strong>4.A Software Defined Sketch System for Traffic Monitoring</strong></p>
+<p>propose: a scheme for the sketch-based monitoring applications</p>
+<p>target: the flexibility of adopting the same data structure for various<br>traffic measurement application</p>
+<p>流量监控</p>
+<p><strong>5.Superspreader Detection System on NetFPGA Platform</strong></p>
+<p>propose: a system to detect superspreaders</p>
+<p>target: estimate their fan-outs accurately using small amount of memory</p>
+<p>安全 攻击源发现</p>
+<p><strong>6.Blueswitch: Enabling Provably Consistent Configuration of Network Switches</strong></p>
+<p>propose: a hardware design that supports a transactional configuration mechanism, and provides packet-consistent configuration.</p>
+<p>target: consistent configuration updates =&gt; even simple rule updates result in inconsistent packet switching in multi-table datapaths.</p>
+<p>流表更新的兼容性</p>
+<p><strong>7.Enabling Performance Evaluation Beyond 10 Gbps</strong></p>
+<p>propose: OSNT, a community-driven, high-performance, open-source traffic generator and capture system</p>
+<p>target: network monitoring and testing =&gt; cheap and flexiable</p>
+<p>收发包系统，网络监测、测试</p>
+<p><strong>8.Flexible, extensible, open-source and affordable FPGA-based traffic generator</strong></p>
+<p>propose: a traffic generator capable of filling a 10 Gb/s Ethernet link, with traffic features specified in software</p>
+<p>target: suitable for high-speed links; generate traffic with some specified features; cheap</p>
+<p>流量生成器，网络测试</p>
+<p><strong>9.Architecture for an open source network tester</strong></p>
+<p>key words:  monitoring, netfpga, open source, packet-sniffing, programmable hardware, traffic-generation, packet-capture, high speed </p>
+<p>流量生成器，抓包工具</p>
+<p><strong>10.Millions of little minions: using packets for low latency network programming and visibility</strong></p>
+<p>propose: a practical approach to rapidly introducing new dataplane functionality into networks; “tiny packet program” (TPP)</p>
+<p>target: visibility into network behavior</p>
+<p>网络行为的可视化能力</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/04/02/DDoS攻击检测综述/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/04/29/NetFPGA-Related-Paper-Overview-2013-2017/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
