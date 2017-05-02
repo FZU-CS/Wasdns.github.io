@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>A Survey on the Security of Stateful SDN Data Planes - Part I | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SDP," />
+  
+
+  <meta name="description" content="A Survey on the Security of Stateful SDN Data Planes1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Survey on the Security of Stateful SDN Data Planes - Part I">
+<meta property="og:url" content="https://wasdns.github.io/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-I/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="A Survey on the Security of Stateful SDN Data Planes1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787">
+<meta property="og:updated_time" content="2017-05-02T07:46:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Survey on the Security of Stateful SDN Data Planes - Part I">
+<meta name="twitter:description" content="A Survey on the Security of Stateful SDN Data Planes1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes"><span class="toc-text">A Survey on the Security of Stateful SDN Data Planes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#INTRODUCTION"><span class="toc-text">INTRODUCTION</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FROM-SDN-TO-STATEFUL-SDN-DATA-PLANES"><span class="toc-text">FROM SDN TO STATEFUL SDN DATA PLANES</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-I" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">A Survey on the Security of Stateful SDN Data Planes - Part I</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.05.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-I/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes"><a href="#A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes" class="headerlink" title="A Survey on the Security of Stateful SDN Data Planes"></a>A Survey on the Security of Stateful SDN Data Planes</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line">Abstract</div><div class="line"></div><div class="line">Introduction</div><div class="line">  |</div><div class="line">  +- A. The rise of stateful SDN data planes</div><div class="line">  |</div><div class="line">  +- B. Security implications of stateful SDN data planes</div><div class="line">  |</div><div class="line">  +- C. Contributions</div><div class="line"></div><div class="line">FROM SDN TO STATEFUL SDN DATA PLANES</div><div class="line">  |</div><div class="line">  +- A. SDN and OpenFlow: background</div><div class="line">  |</div><div class="line">  +- B. The quest for additional flexibility</div><div class="line">  |    |</div><div class="line">  |    +- 1) Multiple Flow Tables</div><div class="line">  |    |</div><div class="line">  |    +- 2) Improved Match/Action flexibility</div><div class="line">  |    |</div><div class="line">  |    +- 3) Tailored stateful OpenFlow Extensions</div><div class="line">  |</div><div class="line">  +- C. Stateful SDN data plane proposals</div><div class="line">  |    |</div><div class="line">  |    +- 1) Platforms and Enabling Technologies</div><div class="line">  |    |</div><div class="line">  |    +- 2) Compilers, Programming Languages, and Frameworks</div><div class="line">  |    </div><div class="line">  |</div><div class="line">  +- D. Stateful SDN enabled applications and use cases</div><div class="line">       |</div><div class="line">       +- 1) Stateful Failure Recovery</div><div class="line">       |</div><div class="line">       +- 2) HULA</div><div class="line">       |</div><div class="line">       +- 3) Port Knocking</div><div class="line">       |</div><div class="line">       +- 4) DNS Tunneling Stateful Detection</div><div class="line">       |</div><div class="line">       +- 5) UDP Flooding Stateful Mitigation</div><div class="line">  </div><div class="line">STATEFUL SDN DATA PLANE SECURITY ISSUES</div><div class="line">  |</div><div class="line">  +- A. Vulnerabilities</div><div class="line">  |    |</div><div class="line">  |    +- 1) Unbounded flow state memory allocation</div><div class="line">  |    |</div><div class="line">  |    +- 2) Triggerable CPU intensive operations</div><div class="line">  |    |</div><div class="line">  |    +- 3) Lack of authentication mechanisms in the data plane</div><div class="line">  |    |</div><div class="line">  |    +- 4) Lack of a central data plane state management</div><div class="line">  |</div><div class="line">  +- B. Attack examples</div><div class="line">  |    |</div><div class="line">  |    +- 1) Switch Memory Saturation Attack</div><div class="line">  |    |</div><div class="line">  |    +- 2) State Inconsistency Attack</div><div class="line">  |    |</div><div class="line">  |    +- 3) CPU Exhaustion Attack</div><div class="line">  |    </div><div class="line">  +- C. Security issues inherited from traditional SDN</div><div class="line">       |</div><div class="line">       +- 1) Control plane vulnerabilities</div><div class="line">       |</div><div class="line">       +- 2) Cross data/control plane vulnerabilities</div><div class="line">       |</div><div class="line">       +- 3) Data plane vulnerabilities</div><div class="line">       </div><div class="line">DISCUSSION AND FUTURE WORK DIRECTIONS</div><div class="line">  |</div><div class="line">  +- A. Analogies with other networking contexts</div><div class="line">  |    |</div><div class="line">  |    +- 1) Ethernet</div><div class="line">  |    |</div><div class="line">  |    +- 2) Information-Centric Networking</div><div class="line">  |</div><div class="line">  +- B. Towards programmable monitoring</div><div class="line">  |    </div><div class="line">  +- C. Secure in-band signaling and verifiable state transition</div><div class="line">  |</div><div class="line">  +- D. State consistency check</div><div class="line">  |</div><div class="line">  +- E. Security-aware development</div><div class="line">  </div><div class="line">CONCLUSION</div></pre></td></tr></table></figure>
+<h2 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h2><p><strong>1.Does these stateful work violate the SDN principle?</strong></p>
+<p>Not at all. The control plane still retain a centralized control of (i) which states are offloaded, for performance reasons, to the switch, and (ii) how states shall be managed.</p>
+<p>The decision of how a switch should react to packet-level events and update the forwarding policies is centrally taken and formalized into data plane programs.</p>
+<p><strong>2.Security implications</strong></p>
+<p>These systems design should be aware of secure implications:</p>
+<ul>
+<li><p>Store per-flow information, i.e., states, inside switches (including distributed storage of states);</p>
+</li>
+<li><p>Ability to change such in-switch states upon data plane packet arrivals or data plane events;</p>
+</li>
+<li><p>Ability of the switches to make autonomous decisions based on the local state information.</p>
+</li>
+</ul>
+<p><strong>3.CONTRIBUTIONS:</strong></p>
+<ul>
+<li><p>1.provide the reader with background on the (novel) trend of stateful SDN data planes</p>
+</li>
+<li><p>2.dissect the relevant security issues, also via a concrete analysis of selected use case applications</p>
+</li>
+</ul>
+<h2 id="FROM-SDN-TO-STATEFUL-SDN-DATA-PLANES"><a href="#FROM-SDN-TO-STATEFUL-SDN-DATA-PLANES" class="headerlink" title="FROM SDN TO STATEFUL SDN DATA PLANES"></a>FROM SDN TO STATEFUL SDN DATA PLANES</h2><p><strong>A. SDN and OpenFlow: background</strong></p>
+<p>(Figure: SDN Overview)</p>
+<p>(Figure: OpenFlow V1.0.0 Flow Table Architecture)</p>
+<p><strong>B. The quest for additional flexibility</strong></p>
+<p>1) Multiple Flow Tables</p>
+<p>req: enable multiple pipelined flow tables and more flexible multiple matching.</p>
+<p>=&gt; Reconfigurable Match Table (RMT) design</p>
+<p>=&gt; P4</p>
+<p>2) Improved Match/Action flexibility</p>
+<p>req: the ability to associate actions to different types of matches</p>
+<p>=&gt; OpenFlow updates</p>
+<p>=&gt; Protocol Oblivious Forwarding - POF</p>
+<p>3) Tailored stateful OpenFlow Extensions</p>
+<p>req: accommodate specific needs which could not be handled via ordinary flow tables and OpenFlow actions</p>
+<p>=&gt; OpenFlow - Group tables</p>
+<p>req: link failure - failure of a link/port, wait the controller to react, packets lost</p>
+<p>=&gt; OpenFlow - fast failover - not an option in latest specification</p>
+<p>other reqs: rate control, learning-type functionalities</p>
+<p>=&gt; bring some very specific stateful operations directly in the switch itself &lt;-&gt; prevent the excessive delay</p>
+<p><strong>C. Stateful SDN data plane proposals</strong></p>
+<p>“Stateful SDN data planes”</p>
+<p>stateful SDN - principles:</p>
+<ul>
+<li><p>Keeping the state information of the flows <strong>inside</strong> the switch and allow programmatically formalized packet-level <strong>state transition</strong>;</p>
+</li>
+<li><p>Giving the capability of <strong>making forwarding state updates decisions to the switch</strong>, based on the local state information of the flows without the need to contact the controller.</p>
+</li>
+</ul>
+<p>=&gt; store a historical information</p>
+<p>1) Platforms and Enabling Technologies</p>
+<p>a.OpenState</p>
+<p>b.FAST </p>
+<p>c.SDPA</p>
+<p>2) Compilers, Programming Languages, and Frameworks</p>
+<p>a.P4</p>
+<p>b.Domino</p>
+<p>c.SNAP</p>
+<p>d.Event-driven Programming</p>
+<p><strong>D. Stateful SDN enabled applications and use cases</strong></p>
+<p>applications running on top of stateful SDN data plane</p>
+<p>1) Stateful Failure Recovery</p>
+<p>Based on OpenState</p>
+<p>a <strong>controller-independent</strong> stateful link/node failure detection and recovery scheme, based on OpenState.</p>
+<p>2) HULA</p>
+<p>Based on RMT/P4 Switches</p>
+<p>data plane <strong>load-balancing technique</strong> for data centers, designed to be adopted on top of programmable switches.</p>
+<p>3) Port Knocking</p>
+<p>Based on OpenState</p>
+<p>an application to show OpenState architecture and operations</p>
+<p>4) DNS Tunneling Stateful Detection</p>
+<p>Based on SNAP</p>
+<p>a running example to explain the SNAP stateful framework</p>
+<p>counter &lt;-&gt; threshold</p>
+<p>5) UDP Flooding Stateful Mitigation</p>
+<p>Based on SNAP</p>
+<p>use case example for the stateful data plane</p>
+<p>an algorithm to identify UDP flooding attack by distinguishing the users who send an unexpected number of UDP packets.</p>
+<p>i) a counter</p>
+<p>ii) a variable udp-flooder[H]</p>
+<p>iii) a threshold</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/04/29/NetFPGA-Related-Paper-Overview-2013-2017/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-II/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-I/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

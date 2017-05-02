@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>A Survey on the Security of Stateful SDN Data Planes - Part II | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SDP," />
+  
+
+  <meta name="description" content="A Survey on the Security of Stateful SDN Data PlanesSTATEFUL SDN DATA PLANE SECURITY ISSUESdesign principle: they push down the flow states to the data plane
+III-A: the main vulnerabilities that are i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Survey on the Security of Stateful SDN Data Planes - Part II">
+<meta property="og:url" content="https://wasdns.github.io/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-II/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="A Survey on the Security of Stateful SDN Data PlanesSTATEFUL SDN DATA PLANE SECURITY ISSUESdesign principle: they push down the flow states to the data plane
+III-A: the main vulnerabilities that are i">
+<meta property="og:updated_time" content="2017-05-02T07:47:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Survey on the Security of Stateful SDN Data Planes - Part II">
+<meta name="twitter:description" content="A Survey on the Security of Stateful SDN Data PlanesSTATEFUL SDN DATA PLANE SECURITY ISSUESdesign principle: they push down the flow states to the data plane
+III-A: the main vulnerabilities that are i">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes"><span class="toc-text">A Survey on the Security of Stateful SDN Data Planes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#STATEFUL-SDN-DATA-PLANE-SECURITY-ISSUES"><span class="toc-text">STATEFUL SDN DATA PLANE SECURITY ISSUES</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-Vulnerabilities"><span class="toc-text">A. Vulnerabilities</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Attack-examples"><span class="toc-text">B. Attack examples</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-Security-issues-inherited-from-traditional-SDN"><span class="toc-text">C. Security issues inherited from traditional SDN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IV-DISCUSSION-AND-FUTURE-WORK-DIRECTIONS"><span class="toc-text">IV. DISCUSSION AND FUTURE WORK DIRECTIONS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-Analogies-with-other-networking-contexts"><span class="toc-text">A. Analogies with other networking contexts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Towards-programmable-monitoring"><span class="toc-text">B. Towards programmable monitoring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-Secure-in-band-signaling-and-verifiable-state-transition"><span class="toc-text">C. Secure in-band signaling and verifiable state transition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D-State-consistency-check"><span class="toc-text">D. State consistency check</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E-Security-aware-development"><span class="toc-text">E. Security-aware development</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-II" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">A Survey on the Security of Stateful SDN Data Planes - Part II</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.05.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-II/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes"><a href="#A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes" class="headerlink" title="A Survey on the Security of Stateful SDN Data Planes"></a>A Survey on the Security of Stateful SDN Data Planes</h1><h2 id="STATEFUL-SDN-DATA-PLANE-SECURITY-ISSUES"><a href="#STATEFUL-SDN-DATA-PLANE-SECURITY-ISSUES" class="headerlink" title="STATEFUL SDN DATA PLANE SECURITY ISSUES"></a>STATEFUL SDN DATA PLANE SECURITY ISSUES</h2><p>design principle: they push down the flow states to the data plane</p>
+<p>III-A: the main vulnerabilities that are in place due to <strong>the intrinsic features</strong> of stateful SDN data plane</p>
+<p>III-B: potential attack scenarios that could occur exploiting <strong>the identified vulnerabilities</strong> of the stateful SDN data plane</p>
+<p>III-C: three use case examples, the feasibility of the considered attacks</p>
+<h3 id="A-Vulnerabilities"><a href="#A-Vulnerabilities" class="headerlink" title="A. Vulnerabilities"></a>A. Vulnerabilities</h3><ul>
+<li><p>unbounded flow state memory allocation</p>
+</li>
+<li><p>triggerable CPU intensive operations</p>
+</li>
+<li><p>lack of authentication mechanisms</p>
+</li>
+<li><p>lack of a central state management</p>
+</li>
+</ul>
+<p><strong>1) Unbounded flow state memory allocation</strong></p>
+<p>each stateful SDN solution must <strong>allocate memory space</strong> to keep track of the state transitions generated by incoming flows</p>
+<p><strong>state table</strong> or array-based variables</p>
+<p>ATTACK: use these in-memory space to exhaust the memory of the switch</p>
+<p><strong>2) Triggerable CPU intensive operations</strong></p>
+<p>“force” <strong>the execution of potentially CPU intensive operations</strong> on a switch</p>
+<p>the control plane requires to receive updates about every event in the network</p>
+<p>ATTACK: perform a DoS attack by forcing the switch to continuously update the control plane, <strong>consuming computation resources</strong> that the switch will not use for packet processing</p>
+<p><strong>3) Lack of authentication mechanisms in the data plane</strong></p>
+<p>the use of control plane independent functionalities, such as load balancing and network management</p>
+<p>from CP to NP =&gt; scarce attention to the security implications, <strong>lack of authentication/encryption mechanism</strong> between switches</p>
+<p>ATTACK: DoS attacks - <strong>impersonate an honest switch</strong> and <strong>inject</strong> fake event/packet to the network, or she can <strong>manipulate</strong> the content of the information passed between the switches =&gt; change a specific flow state </p>
+<p><strong>4) Lack of a central data plane state management</strong></p>
+<p><strong>State inconsistency</strong></p>
+<p>no central entity:</p>
+<ul>
+<li><p>involved in the processing of some data plane events</p>
+</li>
+<li><p>responsible for synchronization of states inside the switches</p>
+</li>
+</ul>
+<p>ATTACK: <strong>influence and force state transitions</strong>, to drive the network into an inconsistent state.</p>
+<p>state inconsistency =&gt; fake packet injection attack, an inappropriate implementation </p>
+<h3 id="B-Attack-examples"><a href="#B-Attack-examples" class="headerlink" title="B. Attack examples"></a>B. Attack examples</h3><ul>
+<li><p>unbounded flow state memory allocation =&gt; memory saturation attack</p>
+</li>
+<li><p>lack of authentication mechanisms =&gt; re-routing attack</p>
+</li>
+<li><p>Triggerable CPU intensive operations =&gt; CPU exhaustion attack</p>
+</li>
+</ul>
+<p><strong>1) Switch Memory Saturation Attack</strong></p>
+<p>a) Port Knocking Attack</p>
+<p>unbounded flow state memory allocation</p>
+<p>b) Attack the UDP Flooding Mitigation</p>
+<p>counter and state variable</p>
+<p><strong>2) State Inconsistency Attack</strong></p>
+<p>lack of authentication mechanisms</p>
+<p><state, event=""> =&gt; routing decision</state,></p>
+<p>a fake packet injection, impose state transition</p>
+<p>a) Re-routing Attack:</p>
+<p>II-D1: Stateful Failure Recovery</p>
+<p>eavesdrops =&gt; inject fake pkts with wrong infos</p>
+<p><strong>3) CPU Exhaustion Attack</strong></p>
+<p>some networking applications(network monitoring and DDoS detection) needs to have an <strong>updated complete overview of the network</strong> =&gt; impose a large number of state transitions: </p>
+<ul>
+<li><p>Sending a large number of <strong>new packets</strong> =&gt; a new entry inside the state table</p>
+</li>
+<li><p>Sending several packets related to an ongoing flow which <strong>already has a record</strong> inside the state table =&gt;  per packet state transition for the corresponding flow</p>
+</li>
+</ul>
+<p>res: the exhaustion of the CPU processing power of the switch</p>
+<h3 id="C-Security-issues-inherited-from-traditional-SDN"><a href="#C-Security-issues-inherited-from-traditional-SDN" class="headerlink" title="C. Security issues inherited from traditional SDN"></a>C. Security issues inherited from traditional SDN</h3><p>traditional SDN security issues</p>
+<p>1.traditional SDN vulnerabilities</p>
+<p>2.discuss</p>
+<ul>
+<li><p>which of them still affect stateful SDN</p>
+</li>
+<li><p>when applicable, the (implicit) security improvements brought by stateful SDN</p>
+</li>
+<li><p>the new challenges (w.r.t. traditional SDN) that stateful SDN introduces</p>
+</li>
+</ul>
+<h2 id="IV-DISCUSSION-AND-FUTURE-WORK-DIRECTIONS"><a href="#IV-DISCUSSION-AND-FUTURE-WORK-DIRECTIONS" class="headerlink" title="IV. DISCUSSION AND FUTURE WORK DIRECTIONS"></a>IV. DISCUSSION AND FUTURE WORK DIRECTIONS</h2><p>In this section we provide <strong>useful practical guidelines</strong> to be applied for a security-aware design of stateful SDN, and draw some <strong>possible future research directions</strong>.</p>
+<h3 id="A-Analogies-with-other-networking-contexts"><a href="#A-Analogies-with-other-networking-contexts" class="headerlink" title="A. Analogies with other networking contexts"></a>A. Analogies with other networking contexts</h3><ul>
+<li><p>1) Ethernet</p>
+</li>
+<li><p>2) Information-Centric Networking</p>
+</li>
+</ul>
+<h3 id="B-Towards-programmable-monitoring"><a href="#B-Towards-programmable-monitoring" class="headerlink" title="B. Towards programmable monitoring"></a>B. Towards programmable monitoring</h3><p>Background:</p>
+<p>monitoring techniques =&gt; defensive strategy</p>
+<p><strong>difference</strong> between stateful SDN and traditional networking scenarios(Ethernet, ICN):</p>
+<p>Ethernet/ICN - monitoring techniques =&gt; specialized network node operation, priori assigned</p>
+<p>Stateful SDN - the node behavior is not a priori specified but arbitrarily programmed</p>
+<p>cmp =&gt; the monitoring problem space in stateful SDN data plane is <strong>significantly wider</strong></p>
+<p>1.solution include <strong>complementary techniques</strong> for not only programmability but also monitoring.</p>
+<p>develop a corresponding <strong>Software-Defined Monitoring paradigm</strong></p>
+<p>2.the stateful SDN network <strong>nodes</strong> for <strong>supporting</strong> both forwarding and monitoring tasks</p>
+<h3 id="C-Secure-in-band-signaling-and-verifiable-state-transition"><a href="#C-Secure-in-band-signaling-and-verifiable-state-transition" class="headerlink" title="C. Secure in-band signaling and verifiable state transition"></a>C. Secure in-band signaling and verifiable state transition</h3><p>Background:</p>
+<p>failure recovery or load balancing =&gt; in-band signaling between switches</p>
+<p>but lack of an authentication and integrity verification mechanism</p>
+<p>so -</p>
+<ul>
+<li><p>devising <strong>trust models</strong> for secure inter-switch (control) packets exchange</p>
+</li>
+<li><p>the relevant associated <strong>cryptographic mechanisms</strong> for verifying the integrity and provenance of the signalling packets</p>
+</li>
+</ul>
+<p>but decrease the speed</p>
+<p>even if the suitable algorithm have been developed -</p>
+<p>two major practical disadvantages:</p>
+<ul>
+<li><p>costly</p>
+</li>
+<li><p>novel constructions not advisable in cryptography</p>
+</li>
+</ul>
+<p>thus, …</p>
+<p><strong>abandoning</strong> the idea of directly verifying a control packet at line rate</p>
+<p>but thinking to a state transition triggered by an in-band signaling packet as a <strong>“two-phase process”</strong>:</p>
+<p>1.a transactional process(fast and intermediate reaction)</p>
+<p>2.actual state transition after confirming(slow but reliable)</p>
+<h3 id="D-State-consistency-check"><a href="#D-State-consistency-check" class="headerlink" title="D. State consistency check"></a>D. State consistency check</h3><p>Background:</p>
+<p>the <strong>flow state transition</strong> inside the switch is based on packet-level events =&gt; the controller does not have <strong>a full control</strong> of the flow states inside the switches</p>
+<p>=&gt; <strong>inconsistent local states</strong> inside the switches + <strong>inconsistency</strong> between the switch and the controller</p>
+<p>so -</p>
+<p>the stateful data plane needs to have the controller <strong>inspection</strong></p>
+<p>but -</p>
+<p>need <strong>precisely defined</strong>, since otherwise the updating procedure may lead to <strong>CPU failure</strong></p>
+<p>thus …</p>
+<p>policy enforcing methodology proposed in SNAP =&gt; controller enforce some policies</p>
+<p>possiable direction:</p>
+<p>consistent switch updates + centralized state storage</p>
+<h3 id="E-Security-aware-development"><a href="#E-Security-aware-development" class="headerlink" title="E. Security-aware development"></a>E. Security-aware development</h3><p>Background:</p>
+<p>inappropriate implementation of <strong>state storing memories</strong> and access <strong>policies</strong> =&gt; vulnerabilities</p>
+<p>so a careful application design and development process is recommended</p>
+<ul>
+<li><p>estimate the required <strong>memory</strong> space</p>
+</li>
+<li><p>define <strong>appropriate conditions</strong> for state removal and eviction</p>
+</li>
+<li><p>applications should carry out only basic (stateful) <strong>network functionalities</strong>, and rely, when possible, on <strong>local state</strong> to take decisions</p>
+</li>
+<li><p>make use of formal verification and static code analysis techniques</p>
+</li>
+</ul>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-I/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-II/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
