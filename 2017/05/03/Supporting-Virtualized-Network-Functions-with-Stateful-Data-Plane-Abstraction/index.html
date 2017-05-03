@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Supporting Virtualized Network Functions with Stateful Data Plane Abstraction | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SDP," />
+  
+
+  <meta name="description" content="Supporting Virtualized Network Functions with Stateful Data Plane AbstractionNFV Offloading to SDN DP
+123456789101112131415161718192021222324252627AbstractIntroductionStateful Data Plane AbstractionA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Supporting Virtualized Network Functions with Stateful Data Plane Abstraction">
+<meta property="og:url" content="https://wasdns.github.io/2017/05/03/Supporting-Virtualized-Network-Functions-with-Stateful-Data-Plane-Abstraction/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="Supporting Virtualized Network Functions with Stateful Data Plane AbstractionNFV Offloading to SDN DP
+123456789101112131415161718192021222324252627AbstractIntroductionStateful Data Plane AbstractionA">
+<meta property="og:updated_time" content="2017-05-03T14:47:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Supporting Virtualized Network Functions with Stateful Data Plane Abstraction">
+<meta name="twitter:description" content="Supporting Virtualized Network Functions with Stateful Data Plane AbstractionNFV Offloading to SDN DP
+123456789101112131415161718192021222324252627AbstractIntroductionStateful Data Plane AbstractionA">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Supporting-Virtualized-Network-Functions-with-Stateful-Data-Plane-Abstraction"><span class="toc-text">Supporting Virtualized Network Functions with Stateful Data Plane Abstraction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Abstract"><span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WHOLE-LOGIC"><span class="toc-text">WHOLE LOGIC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Contributions"><span class="toc-text">Contributions</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Supporting-Virtualized-Network-Functions-with-Stateful-Data-Plane-Abstraction" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Supporting Virtualized Network Functions with Stateful Data Plane Abstraction</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.05.03</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/05/03/Supporting-Virtualized-Network-Functions-with-Stateful-Data-Plane-Abstraction/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="Supporting-Virtualized-Network-Functions-with-Stateful-Data-Plane-Abstraction"><a href="#Supporting-Virtualized-Network-Functions-with-Stateful-Data-Plane-Abstraction" class="headerlink" title="Supporting Virtualized Network Functions with Stateful Data Plane Abstraction"></a>Supporting Virtualized Network Functions with Stateful Data Plane Abstraction</h1><p>NFV Offloading to SDN DP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">Abstract</div><div class="line"></div><div class="line">Introduction</div><div class="line"></div><div class="line">Stateful Data Plane Abstraction</div><div class="line"></div><div class="line">A New Paradigm for the SDN Data Plane</div><div class="line">|</div><div class="line">+-Forwarding Processor</div><div class="line">|</div><div class="line">+-State Table</div><div class="line">|</div><div class="line">+-State Transition Table</div><div class="line">|</div><div class="line">+-Protocol Filter Table</div><div class="line">|</div><div class="line">+-SDN Switch Architecture Supporting SDPA</div><div class="line"></div><div class="line">Use Case and Evaluations</div><div class="line">|</div><div class="line">+-Implementation of a Stateful Firewall</div><div class="line">|</div><div class="line">+-Testing the Scalability of State Tables</div><div class="line"></div><div class="line">Related Work</div><div class="line"></div><div class="line">Conclusion and Future Work</div></pre></td></tr></table></figure>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>Background: </p>
+<p>NFV VNFs =&gt; need concrete state info =&gt; process network flows</p>
+<p>However, OpenFlow lacks the function of stateful processing in SDN DP. =&gt; result in scalability and performance problem</p>
+<p>This Paper: SDPA - A co-processing unit, the forwarding processor, is designed for SDN switches to manage state information through new instructions and state tables</p>
+<h2 id="WHOLE-LOGIC"><a href="#WHOLE-LOGIC" class="headerlink" title="WHOLE LOGIC"></a>WHOLE LOGIC</h2><p>1.VNF - NFV key component</p>
+<ul>
+<li>flexiability</li>
+</ul>
+<p>but</p>
+<ul>
+<li><p>decrease performance</p>
+</li>
+<li><p>NFV MOP doesn’t have a explicit view into VNFs at runtime</p>
+</li>
+</ul>
+<p>2.SDN - implement VNFs</p>
+<p>SD-VNF: controller(rules) + switches(process)</p>
+<p>make up for the drawbacks:</p>
+<ul>
+<li><p>rules implement by specially optimized flow tables/hw =&gt; improve performance</p>
+</li>
+<li><p>controller check errors and conflicts of VNFs at runtime</p>
+</li>
+</ul>
+<p>3.SD-VNF</p>
+<p>can implement any function in theory</p>
+<p>but:</p>
+<p>Invoking the controllers frequently:</p>
+<p>become the bottlenecks of connections between DP and CP</p>
+<p>why?</p>
+<p>the limitation of the expression capability of the SDN data plane</p>
+<p>4.OpenFlow - simple “match-action” abstraction</p>
+<p>drawbacks:</p>
+<p>a)OpenFlow</p>
+<ul>
+<li><p>limited support for stateful packet processing</p>
+</li>
+<li><p>unable to monitor flow states without the involvement of the controller</p>
+</li>
+</ul>
+<p>Heavily relying on the controller:</p>
+<p>=&gt; processing delay + control channel bottleneck</p>
+<p>=&gt; scalability and performance issues</p>
+<p>b) fixed-function switches</p>
+<p>predetermined and predefine the set of header fields and the set of actions:</p>
+<p>=&gt; cannot be extended flexibly</p>
+<p>5.SDPA - SDP Abstraction </p>
+<ul>
+<li><p>close the gap between the requirement and the capability</p>
+</li>
+<li><p>keeping the advantages of the current SDN data plane</p>
+</li>
+</ul>
+<p>required to cover all the functions:</p>
+<ul>
+<li>“match-state-action” paradigm</li>
+</ul>
+<p>maintain the state information in the SDN DP</p>
+<ul>
+<li>a co-processing unit named forwarding processor </li>
+</ul>
+<p>instructions and flow tables inside the switch =&gt; manipulate state information</p>
+<p>6.SDN - centralized governing the forwarding behavior of dumb and low-cost switches</p>
+<p>Is it right? - Nop:</p>
+<ul>
+<li><p>Dynamic applications do need the centralized governing </p>
+</li>
+<li><p>control logic in switches can be handled inside the device =&gt; offload</p>
+</li>
+</ul>
+<h2 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions"></a>Contributions</h2><ul>
+<li><p>SDPA to support NFV; new “match- state-action” paradigm to support various functions that need to process state informations in the SDN data plane</p>
+</li>
+<li><p>a co-processing unit for SDN switches along with the instructions and state tables</p>
+</li>
+<li><p>Implement a NF(firewall) based on this proposed architechture</p>
+</li>
+</ul>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/05/02/A-Survey-on-the-Security-of-Stateful-SDN-Data-Planes-Part-II/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/05/03/Supporting-Virtualized-Network-Functions-with-Stateful-Data-Plane-Abstraction/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
