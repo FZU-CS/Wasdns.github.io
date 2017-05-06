@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Design and Implementation of a Stateful Network Packet Processing Framework for GPUs | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SDP," />
+  
+
+  <meta name="description" content="Design and Implementation of a Stateful Network Packet Processing Framework for GPUsGASPP, a programmable network traffic processing framework tailored to modern graphics processors
+123456789101112131">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design and Implementation of a Stateful Network Packet Processing Framework for GPUs">
+<meta property="og:url" content="https://wasdns.github.io/2017/05/06/Design-and-Implementation-of-a-Stateful-Network-Packet-Processing-Framework-for-GPUs/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="Design and Implementation of a Stateful Network Packet Processing Framework for GPUsGASPP, a programmable network traffic processing framework tailored to modern graphics processors
+123456789101112131">
+<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/D14DA5D8-FF9A-4241-AA27-2AD2CBD048AE.png">
+<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/2888035C-5509-45C2-ABBD-D57F4DA6FCFF.png">
+<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/009B4A1B-DCC2-49F0-828D-C1F76F6EFE20.png">
+<meta property="og:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/F25E868B-BDDB-4858-9ADA-CCB4FCF5285B.png">
+<meta property="og:updated_time" content="2017-05-06T01:19:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Design and Implementation of a Stateful Network Packet Processing Framework for GPUs">
+<meta name="twitter:description" content="Design and Implementation of a Stateful Network Packet Processing Framework for GPUsGASPP, a programmable network traffic processing framework tailored to modern graphics processors
+123456789101112131">
+<meta name="twitter:image" content="https://wasdns.github.io/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/D14DA5D8-FF9A-4241-AA27-2AD2CBD048AE.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Tag
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Design-and-Implementation-of-a-Stateful-Network-Packet-Processing-Framework-for-GPUs"><span class="toc-text">Design and Implementation of a Stateful Network Packet Processing Framework for GPUs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Logic"><span class="toc-text">Logic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Background"><span class="toc-text">Background:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GASPP"><span class="toc-text">GASPP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Contributions"><span class="toc-text">Contributions:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Design-Overview"><span class="toc-text">Design Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stateful-Scenes"><span class="toc-text">Stateful Scenes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Related-Work"><span class="toc-text">Related Work</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Design-and-Implementation-of-a-Stateful-Network-Packet-Processing-Framework-for-GPUs" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Design and Implementation of a Stateful Network Packet Processing Framework for GPUs</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.05.06</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/05/06/Design-and-Implementation-of-a-Stateful-Network-Packet-Processing-Framework-for-GPUs/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="Design-and-Implementation-of-a-Stateful-Network-Packet-Processing-Framework-for-GPUs"><a href="#Design-and-Implementation-of-a-Stateful-Network-Packet-Processing-Framework-for-GPUs" class="headerlink" title="Design and Implementation of a Stateful Network Packet Processing Framework for GPUs"></a>Design and Implementation of a Stateful Network Packet Processing Framework for GPUs</h2><p>GASPP, a programmable network traffic processing framework tailored to modern graphics processors</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">Abstract</div><div class="line"></div><div class="line">INTRODUCTION</div><div class="line"></div><div class="line">MOTIVATION</div><div class="line">|</div><div class="line">+- The Need for Modularity</div><div class="line">|</div><div class="line">+- Eliminating Redundant Data Transfers</div><div class="line">|</div><div class="line">+-The Need for Stateful Processing</div><div class="line"></div><div class="line">DESIGN</div><div class="line">|</div><div class="line">+- Packet Capturing</div><div class="line">|</div><div class="line">+- Packet Filtering</div><div class="line">|</div><div class="line">+- Processing Modules</div><div class="line">|</div><div class="line">+- API</div><div class="line">    |</div><div class="line">    +- Shared Key-Value Store</div><div class="line">    |</div><div class="line">    +- Pattern Matching</div><div class="line">    |</div><div class="line">    +- Cipher Operations</div><div class="line">    |</div><div class="line">    +- Network Packet Manipulation Functions</div><div class="line"></div><div class="line">STATEFUL PROTOCOL ANALYSIS</div><div class="line">|</div><div class="line">+- Flow Tracking</div><div class="line">|</div><div class="line">+- Parallelizing TCP Stream Reassembly</div><div class="line">|</div><div class="line">+- Packet Reordering</div><div class="line"></div><div class="line">OPTIMIZING PERFORMANCE</div><div class="line">|</div><div class="line">+- Inter-Device Data Transfer</div><div class="line">|</div><div class="line">+- Exploiting GPU Memory Hierarchies</div><div class="line">|</div><div class="line">+- Packet Decoding</div><div class="line">|</div><div class="line">+- Packet Scheduling</div><div class="line"></div><div class="line">DEVELOPING WITH GASPP</div><div class="line">|</div><div class="line">+- L3/L4 Firewall</div><div class="line">|</div><div class="line">+- L7 Traffic Classification</div><div class="line">|</div><div class="line">+- Signature-Based Intrusion Detection</div><div class="line">|</div><div class="line">+- AES</div><div class="line"></div><div class="line">PERFORMANCE EVALUATION</div><div class="line"></div><div class="line">LIMITATIONS</div><div class="line"></div><div class="line">RELATED WORK</div><div class="line"></div><div class="line">CONCLUSIONS</div></pre></td></tr></table></figure>
+<h2 id="Logic"><a href="#Logic" class="headerlink" title="Logic"></a>Logic</h2><h3 id="Background"><a href="#Background" class="headerlink" title="Background:"></a>Background:</h3><ul>
+<li><p>Network =&gt; large, complex, high speed</p>
+</li>
+<li><p>Applications =&gt; diversified</p>
+</li>
+<li><p>traffic =&gt; sophisticated</p>
+</li>
+<li><p>network packet processing =&gt; high performance</p>
+</li>
+</ul>
+<p>Previously <strong>programmable special-purpose hardware</strong> solutions:</p>
+<ul>
+<li><p>FPGAs</p>
+</li>
+<li><p>NPUs</p>
+</li>
+<li><p>TCAMs</p>
+</li>
+</ul>
+<p>build network traffic processing <strong>systems</strong> with low cost =&gt; a scalable method of processing network packets <strong>in high-speed environments</strong></p>
+<p>However, implementations based on special-purpose hardware </p>
+<ul>
+<li><p>hard to <strong>extend</strong> and <strong>program</strong></p>
+</li>
+<li><p>cannot be <strong>widely adopted</strong> by the industry.</p>
+</li>
+</ul>
+<p>In contrast, commodity many-core architectures - GPU</p>
+<ul>
+<li><p>accelerating many network applications in high-speed environments</p>
+</li>
+<li><p>efficient network packet processing operations:</p>
+<p>a) computationally intensive</p>
+<p>b) memory-intensive</p>
+</li>
+<li><p>high computational throughput, hide excessive memory latencies</p>
+</li>
+</ul>
+<p>Unfortunately, the <strong>lack</strong> of <strong>programming abstractions and libraries</strong> for GPU-based network traffic processing:</p>
+<ul>
+<li><p><strong>high programming efforts</strong> to maintain high-performance GPU-based network applications</p>
+</li>
+<li><p>complex critical-path operations still run on the CPU </p>
+</li>
+</ul>
+<p>The <strong>absence</strong> of adequate <strong>OS support</strong>:</p>
+<ul>
+<li><p>the cost of data transfers</p>
+</li>
+<li><p>optimize data movements =&gt; design complexity and large code size</p>
+</li>
+</ul>
+<h3 id="GASPP"><a href="#GASPP" class="headerlink" title="GASPP"></a>GASPP</h3><ul>
+<li><p>a network traffic processing <strong>framework</strong> tailored to modern graphics processors, eg.GPU</p>
+</li>
+<li><p>a purely <strong>GPU-powered</strong> implementation</p>
+</li>
+</ul>
+<p><strong>hiding</strong> complicated network processing tasks </p>
+<p>providing <strong>a rich and expressive interface</strong> that exposes only the data that matters to applications</p>
+<p>=&gt; </p>
+<p><strong>build complex GPU-based</strong> network traffic processing <strong>applications</strong> in a <strong>flexible</strong> and <strong>efficient</strong> way</p>
+<h3 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions:"></a>Contributions:</h3><ul>
+<li><p>designed, implemented, and evaluated GASPP</p>
+</li>
+<li><p>the first purely GPU-based implementation of flow state management and TCP stream reconstruction.</p>
+</li>
+<li><p>a novel packet scheduling technique that tackles control flow irregularities and load imbalance across GPU threads</p>
+</li>
+<li><p>a zero-copy mechanism between the network interfaces and the GPU</p>
+</li>
+</ul>
+<h2 id="Design-Overview"><a href="#Design-Overview" class="headerlink" title="Design Overview"></a>Design Overview</h2><p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/D14DA5D8-FF9A-4241-AA27-2AD2CBD048AE.png" alt=""></p>
+<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/2888035C-5509-45C2-ABBD-D57F4DA6FCFF.png" alt=""></p>
+<h2 id="Stateful-Scenes"><a href="#Stateful-Scenes" class="headerlink" title="Stateful Scenes"></a>Stateful Scenes</h2><ul>
+<li>Parallelizing TCP Stream Reassembly</li>
+</ul>
+<p>ensure <strong>the order of connection updates</strong> will be correct when processing packets of <strong>the same connection in parallel</strong></p>
+<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/009B4A1B-DCC2-49F0-828D-C1F76F6EFE20.png" alt=""></p>
+<p>1.hashed all pairs of consecutive packets in the hash table</p>
+<p>2.create the proper packet ordering for each TCP stream using the next_packet array</p>
+<ul>
+<li>Packet Reordering</li>
+</ul>
+<p>TCP sequence hole scenarios</p>
+<p>Whenever an expected packet would be missing, <strong>subsequent packets</strong> would be actively <strong>dropped</strong> until the missing packet arrives.</p>
+<p>result in high PLP</p>
+<p><img src="/Users/wasdns/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/952693358/QQ/Temp.db/F25E868B-BDDB-4858-9ADA-CCB4FCF5285B.png" alt=""></p>
+<p>GASPP only processes packets with sequence numbers <strong>less than or equal to</strong> the connection’s current sequence number (Figure 5(a)–(d))</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><ul>
+<li><p>Click</p>
+</li>
+<li><p>High-Performance Packet I/O: DPDK, netmap, PF-RING, PSIO</p>
+</li>
+<li><p>GPU-Related</p>
+</li>
+</ul>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/05/04/支持未来网络创新的可编程虚拟化路由器技术/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Tag
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/05/06/Design-and-Implementation-of-a-Stateful-Network-Packet-Processing-Framework-for-GPUs/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
