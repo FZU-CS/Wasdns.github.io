@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Large-Scale-SDN-Testbeds-Part-Two | Wasdns</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SDN," />
+  
+
+  <meta name="description" content="A Survey on Large-Scale Software Defined Networking (SDN) Testbeds: Approaches and ChallengesV.Different Large-Scale SDN Testbeds Implementations该部分会对五个典型的大规模SDN测试平台从以下四个方面进行介绍：(1)Design Objectives an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Large-Scale-SDN-Testbeds-Part-Two">
+<meta property="og:url" content="https://wasdns.github.io/2017/08/19/Large-Scale-SDN-Testbeds-Part-Two/index.html">
+<meta property="og:site_name" content="Wasdns">
+<meta property="og:description" content="A Survey on Large-Scale Software Defined Networking (SDN) Testbeds: Approaches and ChallengesV.Different Large-Scale SDN Testbeds Implementations该部分会对五个典型的大规模SDN测试平台从以下四个方面进行介绍：(1)Design Objectives an">
+<meta property="og:updated_time" content="2017-08-19T08:56:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Large-Scale-SDN-Testbeds-Part-Two">
+<meta name="twitter:description" content="A Survey on Large-Scale Software Defined Networking (SDN) Testbeds: Approaches and ChallengesV.Different Large-Scale SDN Testbeds Implementations该部分会对五个典型的大规模SDN测试平台从以下四个方面进行介绍：(1)Design Objectives an">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">Me</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">Me</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Arch
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            Tag
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-Survey-on-Large-Scale-Software-Defined-Networking-SDN-Testbeds-Approaches-and-Challenges"><span class="toc-text">A Survey on Large-Scale Software Defined Networking (SDN) Testbeds: Approaches and Challenges</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#V-Different-Large-Scale-SDN-Testbeds-Implementations"><span class="toc-text">V.Different Large-Scale SDN Testbeds Implementations</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#A-GENI-OpenFlow"><span class="toc-text">A.GENI OpenFlow</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#B-OFELIA"><span class="toc-text">B.OFELIA</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Large-Scale-SDN-Testbeds-Part-Two" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Large-Scale-SDN-Testbeds-Part-Two</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.08.19</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Wasdns</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="https://wasdns.github.io/2017/08/19/Large-Scale-SDN-Testbeds-Part-Two/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="A-Survey-on-Large-Scale-Software-Defined-Networking-SDN-Testbeds-Approaches-and-Challenges"><a href="#A-Survey-on-Large-Scale-Software-Defined-Networking-SDN-Testbeds-Approaches-and-Challenges" class="headerlink" title="A Survey on Large-Scale Software Defined Networking (SDN) Testbeds: Approaches and Challenges"></a>A Survey on Large-Scale Software Defined Networking (SDN) Testbeds: Approaches and Challenges</h3><h4 id="V-Different-Large-Scale-SDN-Testbeds-Implementations"><a href="#V-Different-Large-Scale-SDN-Testbeds-Implementations" class="headerlink" title="V.Different Large-Scale SDN Testbeds Implementations"></a>V.Different Large-Scale SDN Testbeds Implementations</h4><p>该部分会对五个典型的大规模SDN测试平台从以下四个方面进行介绍：(1)Design Objectives and Development：测试平台的Overview；(2)Key Technologies：管理、网络以及切片技术的介绍；(3)Network Deployment：测试平台的实现；(4)Experiment：介绍了已执行的SDN实验。</p>
+<h5 id="A-GENI-OpenFlow"><a href="#A-GENI-OpenFlow" class="headerlink" title="A.GENI OpenFlow"></a>A.GENI OpenFlow</h5><p><strong>1.Design Objectives and Development：</strong>GENI(Global Environment for Network Innovation)是美国的NSF支持的，并使用创新的网络技术比如网络虚拟化、OpenFlow和SDN，来保证网络创新和规模性的实验实体。GENI使用螺旋式的演变发展模型，在头两个阶段，创建了一个端到端的工作原型，并朝向可持续的实验发展；在第三个阶段，GENI使用了OpenFlow技术，并将OpenFlow交换机部署至校园网；现如今GENI是处于第六个阶段，这个阶段的主要目标包括：(1)通过更好的工具和服务吸引更多的实验；(2)通过部署GENI的框架以及增加支持GENI的园区网增大GENI的规模；(3)修正GENI的指令及测量系统。</p>
+<p><strong>OpenFlow逐渐成为GENI中的支撑技术，它保证了GENI为租户提供真实的环境以进行规模实验，同时也实现了GENI的核心概念，切片和深度可编程性。</strong>在GENI中，OpenFlow交换机提供深度的可编程性，给予了网络管理人员确切定义策略的能力，用以管理网络安全。GENI OpenFlow现在对大家开放，用户能够通过GENI portal接触它。</p>
+<p><strong>2.Key Technologies：</strong>GENI的关键技术主要包括三个方面：控制框架、网络技术以及切片技术。</p>
+<blockquote>
+<p>a)管理技术：</p>
+</blockquote>
+<p>为了建立一个大规模且合乎逻辑的架构，GENI使用了一个联合的架构，也就是说，<strong>GENI从不同的供应商处获取资源。每一个供应商管理它的资源并且为实验人员提供使用资源的权力。</strong>GENI控制框架GCF由四个部分组成：GENI元操作中心(GMOC)，交换中心(Clearinghouse)，工具以及资源池(Aggregates)，它们之间的关系如图所示：</p>
+<p>[fig4]</p>
+<ul>
+<li>GENI工具：主要用于管理和控制GENI资源。</li>
+<li>GENI资源池：为实验人员提供资源。</li>
+<li>GMOC：发现、报告以及升级GENI架构，以保证GENI架构的健康；将实验与GENI操作员们相连接。</li>
+<li>GENI交换中心：将实验人员、GENI资源池以及GMOC联系起来，为GENI提供必需的信任度、认证、责任以及授权服务。</li>
+</ul>
+<p>以上四个部分是通过一种编排方式联系起来的。</p>
+<p><strong>GENI实验的生命周期主要由这三个阶段组成：设计/设置，执行以及结束。</strong></p>
+<ul>
+<li><strong>设计/设置阶段：</strong>(1)用户设置一个GENI账号，并加入GENI项目，这一步中，GENI将拥有本地策略的虚拟机服务聚集起来，这些服务决定了它们信任和接受的、负责同意用户、项目以及切片以及发布不同证件的协调人；(2)用户请求交换中心以获取资源管理者的列表；(3)用户请求资源管理者，资源管理者返回完善的远距离访问接口，用于创建切片和保留资源。</li>
+<li><strong>执行阶段：</strong>用户登录通过GENI工具至节点以执行他们的实验，并监控实验的执行。</li>
+<li><strong>结束阶段：</strong>用户应该删除资源并结束他们的实验。</li>
+</ul>
+<p>上述完整的生命周期是由GMOC保证的。</p>
+<blockquote>
+<p>b)网络技术：</p>
+</blockquote>
+<p>GENI基于实验需求、现有网络以及潜在的新连接提供了许多网络技术的选项。图5是一个内部互联园区网的案例，展示了一个简单且典型的网络连接拓扑：</p>
+<p>[fig5]</p>
+<p><strong>GENI OpenFlow测试平台是由控制和管理平面以及数据平面组成的。</strong> <strong>控制和管理平面用于配置和管理在数据平面执行的实验，</strong>用户可以通过在Internet和上层隧道技术上的SSH连接来访问切片。控制路径通常是跑管理流量，比如控制和监控的数据。<strong>数据平面包含用户的切片并负责执行实验，</strong>它支持使用三层和二层的技术，二层的选项通常用于连接园区级、区域级和国家级的研究网络，三层的选项通常是上层的隧道，将控制平面和数据平面相连接，并被实验人员用于管理它们的切片。二层的技术包括Single VLAN、VLAN Translation、L2 Tunneling、Fiber Connection。</p>
+<blockquote>
+<p>c)切片技术</p>
+</blockquote>
+<p>GENI采用了PlanetLab测试平台的切片技术，切片能力是支持虚拟化技术的能力，用于支持不同实验的并行以提升网络资源的利用率。传统的网络使用VLAN来实现基本的虚拟化策略，但是在GENI为了提供更灵活的网络虚拟化方法，使用了支持OpenFlow的组件来允许多租户控制器管理同一片资源。</p>
+<p>[fig6]</p>
+<p>主要有三种虚拟化技术：FlowVisor、OVX、Flowspace Firewall。</p>
+<p>FlowVisor：</p>
+<p>[fig7]</p>
+<p>OpenVirteX：</p>
+<p>[fig8]</p>
+<p>FlowSpace Firewall(FSFW)：</p>
+<p>FSFW是印第安纳大学开发的一个用于提供网络功能虚拟化的Floodlight插件，相比于其他切片工具，<strong>FSFW更加关心不同控制器之间的一致性：如果一个控制器发送了一个能够导致数据平面矛盾的规则，FSFW拒绝该规则并返回错误信息。</strong>由于该功能，FSFW能够处于物理OpenFlow交换机和其他切片工具之间。</p>
+<p><strong>3.Network Deployment：</strong>主要是从两个方面介绍GENI网络部署，园区网络以及国家级别的骨干网络。</p>
+<blockquote>
+<p>a)园区网络部署</p>
+</blockquote>
+<p>Stanford University Deployment：</p>
+<p>[fig9]</p>
+<blockquote>
+<p>b)国家级骨干网络部署</p>
+</blockquote>
+<p>[fig10]</p>
+<p><strong>4.Experiments：</strong>包括两个主要的实验。第一个实验设计了一个系统用以提供GENI的研究人员使用无线资源的能力；第二个实验介绍了SDN Open Transport Switch(OTS)的原型，该系统拓展OpenFlow以支持可选的传输能力，来保证应用驱动可选的传输带宽服务。</p>
+<p>实验一：</p>
+<p>[fig11]</p>
+<p>实验二：</p>
+<p>[fig12]</p>
+<h5 id="B-OFELIA"><a href="#B-OFELIA" class="headerlink" title="B.OFELIA"></a>B.OFELIA</h5><p><strong>1.Design Objectives and Development：</strong>OFELIA在2010年的秋天由欧洲 Seventh Framework Programme (FP7) 项目启动，<strong>它的主要目标是设置一个多层、多域以及地理上分布的未来网络测试平台实体，能够适应不同类型的流量，以及为日常使用和基于OpenFlow的新型网络实验提供服务。</strong>为了实现这些目标，OFELIA的设计遵守这些信条：</p>
+<ul>
+<li>Flexibility and modularity：预先定义的功能应该是受限的，模块的发展应该具备拓展性；</li>
+<li>Fidelity use and easy use：能够适应产品流量，OAM(操作维护管理)应该尽可能简化；</li>
+<li>Resource isolation and security：需要实现虚拟化以隔离不同流量，需要保证AAA；</li>
+<li>Island autonomy and federation：不同的领域(island)管理应该在行政上是分离的，并且应该支持领域间的联合。</li>
+</ul>
+<p>OFELIA的第一个时期(duration)是由三个阶段组成的。第一个阶段OFELIA成功设置了underlaying的实体，包括一些OpenFlow的交换机和VM实体；第二个阶段，OFELIA实现了不同域之间的内部连接，并往无线和光纤领域拓展了SDN实验；第三个阶段加入了OFELIA控制框架为Internet的其他实体和测试平台提供连接。<strong>OFELIA已经不再提供接入服务了，它只接收EU-limited的开放调用。</strong></p>
+<p><strong>2.Key Technologies：</strong></p>
+<blockquote>
+<p>a)管理技术</p>
+</blockquote>
+<p><strong>OFELIA开发了OFELIA控制框架OCF作为编排器，用来保证操作者对于underlaying的实体的管理以及用户对于它们实验的接入。</strong>OCF主要致力于对资源分配进行仲裁，自动化测试平台的管理，简化实验的生命周期。</p>
+<p>[fig13]</p>
+<p><strong>在该架构中定义了三个层次，入口(portal)、互联中心(Clearinghouse)以及资源管理。</strong>入口用于解决用户对他们切片的操作并简化操作员的管理；互联中心用于在域间同步用户的账户和权力，并通过 Lightweight Directory Access Protocol (LDAP) 服务器提供通用的认证；资源管理的模块分别是虚拟化聚合模块(AM)和OpenFlow聚合模块，AM将资源管理的接口与交换机中心相绑定，负责将VM聚合为切片，OpenFlow聚合模块，应用于网络切片规则和配置的管理。除了这些模块，还有其他有用的插件，这里不列举了。</p>
+<p><strong>OCF的最初设计方法是从GENI中的用户案例和经验衍生出来的。</strong> </p>
+<p><strong>OFELIA实验的周期主要由三个阶段组成：配置、执行以及结束。</strong></p>
+<ul>
+<li>配置阶段：分为三步首先，初始化时，用户通过基于web的用户接口配置他们的实验，这是由OCF的Portal模块提供的；第二步，用户请求互联中心以获取权限；最后，用户请求资源管理者以获取用于创建切片的资源。</li>
+<li>执行阶段：用户可以登陆并进行实验。</li>
+<li>结束阶段：用户删除并释放资源。</li>
+</ul>
+<blockquote>
+<p>b)网络技术</p>
+</blockquote>
+<p>除了实验网，OFELIA有两个带外(out-of-band)网络用于控制和管理，所有的OFELIA域与现在都与OFELIA hub内部进行互联，形成了一个星型网络。OFELIA hub作为一个中转站来在域间传递实验以及控制流量。</p>
+<ul>
+<li>实验网络：涵盖所有的OFELIA域。</li>
+<li>控制和管理网络：带外的网络，与不同的OFELIA域互联。</li>
+</ul>
+<p>[fig14]</p>
+<blockquote>
+<p>c)切片技术</p>
+</blockquote>
+<p>FlowVisor能够用于切片OFELIA，但是它有很多缺陷，于是有些研究人员基于FlowVisor研究出了VeRTIGO、Optical FlowVisor来解决这些问题。</p>
+<p>[fig15]</p>
+<blockquote>
+<p>d)硬件层抽象</p>
+</blockquote>
+<p>随着SDN被广泛接受，新的网络设备将它们的FE和CE相分离。同时使用OpenFlow设备和非OpenFlow设备的想法推动了硬件抽象层(HAL)的发展。HAL诞生于Alien项目，一个想要<strong>将非OpenFlow的平台整合至OFELIA的基于OpenFlow的架构中，并统一控制和管理异构的网络设备。</strong>HAL屏蔽了不同的技术和厂商特定的细节，有两个分离的层次，硬件接口层(HIL)和硬件表示层(HPL)。</p>
+<p>[fig16]</p>
+<ul>
+<li>HIL：<strong>HIL的组件协同工作，作为一个通用的控制和管理协议，比如OpenFlow或者其他的SDN南向，并且向上屏蔽了底层硬件平台的复杂性。</strong>HIL组件在控制器和转发设备之间起到一个代理的作用，包括以下两个子组件：虚拟化组件用于向支持HAL的设备提供虚拟化能力；OpenFlow的endpoint是OpenFlow通道的端点，维持与上层控制器的通信，并向下发送类OpenFlow的流表。</li>
+<li>HPL：HPL组件区别于不同的设备类型。一般来说，北向的HPL API接收到来自HIL的流表以控制转发。<strong>设备信息模型代表了OpenFlow交换机的状态，且独立于底层的平台硬件。设备驱动通过物理硬件实现了数据转发，它是平台相关的，将所有OpenFlow的流表转换为特定的语言，并模拟OpenFlow交换机的转发行为。</strong></li>
+</ul>
+<p><strong>3.Network Deployment：</strong></p>
+<p>[fig17]</p>
+<p><strong>4.Experiments：</strong>在OFELIA上实现了许多优秀的实验，如光设备的整合以及在SDN中支持ICN。这一部分的具体细节请参照原文。</p>
+<blockquote>
+<p>a)光设备的整合</p>
+</blockquote>
+<p>[table3]</p>
+<p>OpenFlow-GMPLS：OF控制器与传统光设备相整合的架构。</p>
+<p>[fig18]</p>
+<blockquote>
+<p>b)支持ICN</p>
+</blockquote>
+<p>拓展OpenFlow协议，支持内容命名转发。</p>
+<p>[fig19]</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Wasdns</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/08/17/Large-Scale-SDN-Testbeds-Part-One/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Arch
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              Tag
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'https://wasdns.github.io/2017/08/19/Large-Scale-SDN-Testbeds-Part-Two/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
